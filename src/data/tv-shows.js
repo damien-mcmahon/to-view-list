@@ -4,11 +4,16 @@ const API_BASE = 'https://api.themoviedb.org/3/';
 const API_KEY = '4c7f9853119ef8c124433ee8a0f7fcec';
 const API_PATHS = {
   'search': 'search/tv'
+};
+const DEFAULT_LANGUAGE = 'en-GB';
+
+const DEFAULT_PROPS = {
+  api_key: API_KEY,
+  language: DEFAULT_LANGUAGE
 }
 
 function getAPIPathFromType(type, data) {
-  data.api_key = API_KEY;
-  return `${API_PATHS[type]}${dataToQueryParams(data)}`;
+  return `${API_PATHS[type]}${dataToQueryParams(Object.assign(DEFAULT_PROPS, data))}`;
 }
 
 function dataToQueryParams(data) {
@@ -30,9 +35,7 @@ function buildAPIUrl(apiType, data) {
 
 const TVShowAPIService = {
   searchForShows(query) {
-    return fetchJSONP(buildAPIUrl('search', {query:query})).then((response) => {
-      return response.json()
-    }); 
+    return fetchJSONP(buildAPIUrl('search', {query:query})).then((response) => response.json()); 
   }
 };
 

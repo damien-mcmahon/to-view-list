@@ -8,21 +8,33 @@ import TvShowAPIService from '../../data/tv-shows';
 
 import style from './style';
 
-const appStateToProps = (state) => ({showList: state.tvShows});
+const appStateToProps = (state) => ({ showList: state.tvShows });
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.doSearch = this.doSearch.bind(this);
+    this.selectShow = this.selectShow.bind(this);
   }
 
-  doSearch(searchTerm){
-    TvShowAPIService.searchForShows(searchTerm).then((responses) => {
+  doSearch(searchTerm) {
+    TvShowAPIService.searchForShows(searchTerm).then((response) => {
       //dispatch to State...
+      if (response.results) {
+        this.setState({
+          searchResults: response.results
+        });
+      }
     });
   }
   
-  onSelect(selectedShow) {
+  selectShow(selectedShow) {
+    const { dispatch } = this.props;
+
+    //dispatch
+    this.setState({
+      searchResults: null
+    });
   }
 
 	render(props, {searchResults}) {
@@ -31,7 +43,7 @@ class Home extends Component {
 		return (
 			<div class="to-view-list--home--wrapper">
         <TvSearch searchFor={this.doSearch} />
-        <SearchResultList resultsSet={this.searchResults} onSelect={this.selectShow} />
+        <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
         <TvShowList shows={this.props.showList}/>
 			</div>
 		);
