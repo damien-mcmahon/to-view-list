@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import { Provider, connect } from 'preact-redux';
 
 import Header from './header';
 import Home from './home';

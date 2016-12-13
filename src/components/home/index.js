@@ -1,6 +1,9 @@
 import { h, Component } from 'preact';
+
 import TvSearch from '../tv-search';
 import SearchResultList from '../search-result-list';
+import TvShowList from '../../containers/tv-show-list';
+
 import style from './style';
 
 export default class Home extends Component {
@@ -18,6 +21,7 @@ export default class Home extends Component {
 			<div>
         <TvSearch searchFor={this.doSearch} />
         <SearchResultList resultsSet={this.searchResults} onSelect={this.selectShow} />
+        <TvShowList />
 			</div>
 		);
 	}
