@@ -3,7 +3,7 @@ import { Router } from 'preact-router';
 import { Provider, connect } from 'preact-redux';
 
 import Header from './header';
-import Home from './home';
+import Home from '../containers/home';
 
 
 export default class App extends Component {

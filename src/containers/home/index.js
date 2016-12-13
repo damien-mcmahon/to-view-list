@@ -1,9 +1,9 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
-import TvSearch from '../tv-search';
-import SearchResultList from '../search-result-list';
-import TvShowList from '../../containers/tv-show-list';
+import TvSearch from '../../components/tv-search';
+import SearchResultList from '../../components/search-result-list';
+import TvShowList from '../../components/tv-show-list';
 
 import style from './style';
 
