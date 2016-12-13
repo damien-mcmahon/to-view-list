@@ -68,13 +68,15 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "fetch-jsonp": "^1.0.3",
     "preact": "^6.0.0",
     "preact-compat": "^3.0.0",
     "preact-redux": "^1.2.0",
     "preact-router": "^2.0.0",
     "proptypes": "^0.14.3",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^2.0.1"
   },
   "main": "webpack.config.babel.js",
   "directories": {
