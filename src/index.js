@@ -1,7 +1,6 @@
 // import 'lie';
 // import 'isomorphic-fetch';
 import { h, render } from 'preact';
-import './style';
 
 let root;
 function init() {

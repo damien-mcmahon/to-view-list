@@ -53,7 +53,7 @@ module.exports = {
 				loader: ExtractTextPlugin.extract('style?singleton', [
 					`css?sourceMap=${CSS_MAPS}&modules&importLoaders=1&localIdentName=[local]${process.env.CSS_MODULES_IDENT || '_[hash:base64:5]'}`,
 					'postcss',
-					`scss?sourceMap=${CSS_MAPS}`
+					`sass-loader?sourceMap=${CSS_MAPS}`
 				].join('!'))
 			},
 			{
@@ -62,7 +62,7 @@ module.exports = {
 				loader: ExtractTextPlugin.extract('style?singleton', [
 					`css?sourceMap=${CSS_MAPS}`,
 					`postcss`,
-					`scss?sourceMap=${CSS_MAPS}`
+					`sass-loader?sourceMap=${CSS_MAPS}`
 				].join('!'))
 			},
 			{
