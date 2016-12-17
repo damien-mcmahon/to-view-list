@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 
 const DEBOUNCE_TIME = 400;
+const MINIMUM_SEARCH_LENGTH = 3;
 
 export default class TvSearch extends Component {
   constructor(props) {
@@ -10,13 +11,17 @@ export default class TvSearch extends Component {
   }
 
   search(e) {
+    let searchTerm = e.target.value;
+
+    if (searchTerm.length < MINIMUM_SEARCH_LENGTH) {
+      return;
+    }
+
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
 
     this.timeout = setTimeout(() => {
-      const searchTerm = e.target.value;
-
       this.props.searchFor(searchTerm);
       this.setState({
         searchTerm: searchTerm

@@ -5,7 +5,10 @@ import TvSearch from '../../components/tv-search';
 import SearchResultList from '../../components/search-result-list';
 import TvShowList from '../../components/tv-show-list';
 import TvShowAPIService from '../../data/tv-shows';
-import { addTvShowToList } from '../../actions/tv-show';
+import { 
+  addTvShowToList, 
+  removeTvShowFromList 
+} from '../../actions/tv-show';
 
 const appStateToProps = (state) => ({ showList: state.tvShows });
 
@@ -14,6 +17,7 @@ class Home extends Component {
     super(props);
     this.doSearch = this.doSearch.bind(this);
     this.selectShow = this.selectShow.bind(this);
+    this.removeItem = this.removeItem.bind(this);
 
     this.state = {
       clearSearch: false
@@ -45,6 +49,12 @@ class Home extends Component {
     });
   }
 
+  removeItem(tvShow) {
+    const { dispatch } = this.props;
+    dispatch(removeTvShowFromList(tvShow));
+    this.setState();
+  }
+
 	render() {
     let shows = this.props.showList;
     
@@ -52,7 +62,7 @@ class Home extends Component {
 			<div class="to-view-list--home--wrapper">
         <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
         <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
-        <TvShowList shows={shows}/>
+        <TvShowList shows={shows} removeItem={this.removeItem}/>
 			</div>
 		);
 	}
