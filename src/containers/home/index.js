@@ -14,6 +14,10 @@ class Home extends Component {
     super(props);
     this.doSearch = this.doSearch.bind(this);
     this.selectShow = this.selectShow.bind(this);
+
+    this.state = {
+      clearSearch: false
+    };
   }
 
   doSearch(searchTerm) {
@@ -21,7 +25,8 @@ class Home extends Component {
       //dispatch to State...
       if (response.results) {
         this.setState({
-          searchResults: response.results
+          searchResults: response.results,
+          clearSearch: false
         });
       }
     });
@@ -30,24 +35,24 @@ class Home extends Component {
   selectShow(selectedShow) {
     const { dispatch } = this.props;
 
-    //dispatch
-    this.setState({
-      searchResults: null
-    });
-
     TvShowAPIService.getTvShowInfo(selectedShow.id).then((tvShow) => {
       dispatch(addTvShowToList(tvShow));
+
+      this.setState({
+        searchResults: null,
+        clearSearch: true
+      });
     });
   }
 
-	render(props, {searchResults}) {
+	render() {
     let shows = this.props.showList;
-
+    
 		return (
 			<div class="to-view-list--home--wrapper">
-        <TvSearch searchFor={this.doSearch} />
+        <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
         <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
-        <TvShowList shows={this.props.showList}/>
+        <TvShowList shows={shows}/>
 			</div>
 		);
 	}

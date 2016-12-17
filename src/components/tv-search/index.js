@@ -15,8 +15,21 @@ export default class TvSearch extends Component {
     }
 
     this.timeout = setTimeout(() => {
-      this.props.searchFor(e.target.value);
+      const searchTerm = e.target.value;
+
+      this.props.searchFor(searchTerm);
+      this.setState({
+        searchTerm: searchTerm
+      });
     }, DEBOUNCE_TIME);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(newProps && newProps.clearSearch) {
+      this.setState({
+        searchTerm: ''
+      });
+    }
   }
 
   render() {
