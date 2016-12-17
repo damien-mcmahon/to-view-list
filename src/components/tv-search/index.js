@@ -22,7 +22,7 @@ export default class TvSearch extends Component {
   render() {
     return (
       <div class="tv-search--wrapper">
-        <input type="search" placeholder="Breaking Bad" onInput={this.search} />
+        <input type="search" class="tv-search--input" placeholder="Breaking Bad" onInput={this.search} />
       </div>
     );
   }

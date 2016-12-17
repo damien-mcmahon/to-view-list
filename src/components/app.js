@@ -5,6 +5,7 @@ import { Provider, connect } from 'preact-redux';
 import Header from './header';
 import Home from '../containers/home';
 
+import style from '../style';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.

@@ -1,0 +1,13 @@
+@import 'components/header';
+@import 'components/tv-search';
+@import 'components/search-results';
+@import 'components/tv-show-poster';
+
+$app-bg: #EEE;
+
+#app {
+  display: flex;
+  flex-direction: column;
+  background: $app-bg;
+  height: 100%;
+}

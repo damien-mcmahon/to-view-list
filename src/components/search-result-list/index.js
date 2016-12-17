@@ -14,12 +14,12 @@ export default class SearchResultList extends Component {
   render() {
     const resultSet = this.props.resultsSet || []
     return (
-      <div class="search-result-list--wrapper">
+      <ul class="search-result-list--wrapper">
         {resultSet.map((result) => {
           return <SearchResultItem result={result} onClick={this.sendItem} />
           })
         } 
-      </div>
+      </ul>
     );
   }
 };

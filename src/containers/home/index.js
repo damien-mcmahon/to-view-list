@@ -6,8 +6,6 @@ import SearchResultList from '../../components/search-result-list';
 import TvShowList from '../../components/tv-show-list';
 import TvShowAPIService from '../../data/tv-shows';
 
-import style from './style';
-
 const appStateToProps = (state) => ({ showList: state.tvShows });
 
 class Home extends Component {
