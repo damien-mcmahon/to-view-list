@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import TvShowPoster from '../tv-show-poster/';
 
 export default class SearchResultItem extends Component {
   constructor(props) {
@@ -13,7 +14,11 @@ export default class SearchResultItem extends Component {
   render() {
     const result = this.props.result || {}
     return (
-      <li onClick={this.sendItem}>{result.name}</li>
+      <li class="search-result-item--wrapper">
+        <TvShowPoster path={result.poster_path} tvShow={result.name} size="small" />
+        <h1 class="search-result-item--name">{result.name}</h1>
+        <button class="search-result-item--add-to-list" onClick={this.sendItem}>Add to List</button>
+      </li>
     );
   }
 };
