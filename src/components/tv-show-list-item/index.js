@@ -11,12 +11,16 @@ export default class TvShowListItem extends Component {
   constructor(props) {
     super(props);
     this.removeButtonClickHandler = this.removeButtonClickHandler.bind(this);
+    this.showInfoPanel = this.showInfoPanel.bind(this);
   }
 
   removeButtonClickHandler() {
     this.props.onRemove(this.props.show);
   }
 
+  showInfoPanel() {
+    this.props.onInfoClick(this.props.show);
+  }
 
   dayOfWeekAired(show) {
     let airDate = new moment(show.last_air_date);

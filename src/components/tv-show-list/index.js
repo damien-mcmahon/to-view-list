@@ -5,10 +5,15 @@ export default class TvShowList extends Component {
   constructor(props) {
     super(props);
     this.removeItemHandler = this.removeItemHandler.bind(this);
+    this.showItemHandler = this.showItemHandler.bind(this);
   }
 
   removeItemHandler(item) {
     this.props.removeItem(item);
+  }
+
+  showItemHandler(item) {
+    this.props.showInfoPanel(item);
   }
 
   render() {
@@ -17,7 +22,7 @@ export default class TvShowList extends Component {
     return (
       <div class="tv-show-list--wrapper">
         {shows.map((show) => {
-          return <TvShowListItem show={show}  onRemove={this.removeItemHandler} />
+          return <TvShowListItem show={show}  onRemove={this.removeItemHandler} onInfoClick={this.showItemHandler}/>
         })}
       </div>
     );
