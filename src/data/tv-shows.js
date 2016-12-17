@@ -24,7 +24,12 @@ function getAPIPathFromType(type, data) {
 
 function dataToQueryParams(data) {
   let keys = Object.keys(data);
-  let values = Object.values(data);
+  let values = [];
+
+  for(let key, value in data) {
+    values.push(value);
+  }
+
   let paramString = '?';
 
   return paramString + keys.map((key, index) => `${key}=${urlSafe(values[index])}`).join('&');

@@ -21,15 +21,12 @@ export default class TvShowListItem extends Component {
   dayOfWeekAired(show) {
     let airDate = new moment(show.last_air_date);
 
-    console.log("SHOW LAD: ", show.last_air_date);
-
     return airDate.format('dddd');
   }
 
   render() {
     const show = this.props.show;
     const cssStatusClass = STATUS_TO_CSS_MAP[show.status.toLowerCase()];
-    console.log("SHOW:", show);
     return (
       <div class={`tv-show-list-item--wrapper ${cssStatusClass}`}>
         <TvShowPoster path={show.poster_path} tvShow={show.name} size="medium" />
