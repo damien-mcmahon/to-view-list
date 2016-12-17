@@ -1,0 +1,17 @@
+$button-action-add-bg: #0C0;
+$button-action-add-colour: #FFF;
+
+.button {
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid #CCC;
+  padding: 5px 10px;
+
+
+  &.--action-add {
+    background: $button-action-add-bg;
+    color: $button-action-add-colour;
+    border: darken($button-action-add-bg, 20%);
+  }
+}
+
