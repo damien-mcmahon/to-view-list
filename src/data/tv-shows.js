@@ -26,8 +26,8 @@ function dataToQueryParams(data) {
   let keys = Object.keys(data);
   let values = [];
 
-  for(let key, value in data) {
-    values.push(value);
+  for(let key in data) {
+    values.push(data[key]);
   }
 
   let paramString = '?';
