@@ -5,6 +5,7 @@ import TvSearch from '../../components/tv-search';
 import SearchResultList from '../../components/search-result-list';
 import TvShowList from '../../components/tv-show-list';
 import TvShowAPIService from '../../data/tv-shows';
+import { addTvShowToList } from '../../actions/tv-show';
 
 const appStateToProps = (state) => ({ showList: state.tvShows });
 
@@ -32,6 +33,10 @@ class Home extends Component {
     //dispatch
     this.setState({
       searchResults: null
+    });
+
+    TvShowAPIService.getTvShowInfo(selectedShow.id).then((tvShow) => {
+      dispatch(addTvShowToList(tvShow));
     });
   }
 
