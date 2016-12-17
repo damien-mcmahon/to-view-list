@@ -1,0 +1,46 @@
+.tv-show-list-item--wrapper {
+  display: flex;
+  border-bottom: 1px solid #DDD;
+  padding: 5px;
+  flex-wrap: wrap;
+
+  .tv-show-poster--wrapper {
+    width: 60px;
+  }
+  .tv-show-list-item--info-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .tv-show-list-item--info-wrapper,
+  .tv-show-list-item--title-wrapper,
+  .tv-show-list-item--progress-wrapper {
+    flex: 1;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    align-items: flex-start;
+  }
+
+  .tv-show-list-item--progress-wrapper {
+  }
+
+  .tv-show-list-item--title {
+    font-size: 13px;
+    display: inline-block;
+    text-transform: uppercase;
+    width: 70%;
+  }
+
+  .tv-show-list-item--seasons,
+  .tv-show-list-item--episodes, 
+  .tv-show-list-item--day-of-week {
+    font-size: 11px;
+    background: #CCC;
+    color: #FFF;
+    padding: 2.5px;
+    border-radius: 5px;
+    display: inline;
+  }
+}

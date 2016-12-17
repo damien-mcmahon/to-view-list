@@ -3,12 +3,17 @@
 @import 'components/tv-search';
 @import 'components/search-results';
 @import 'components/tv-show-poster';
+@import 'components/tv-show-list-item';
 
 $app-bg: #EEE;
+a {
+  text-decoration: none;
+}
 
 #app {
   display: flex;
   flex-direction: column;
   background: $app-bg;
   height: 100%;
+  font-family: 'Open Sans', sans-serif;
 }
