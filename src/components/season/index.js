@@ -7,12 +7,18 @@ export default class Season extends Component {
     super(props);
     this.setSeasonViewed = this.setSeasonViewed.bind(this);
     this.toggleEpisodesList = this.toggleEpisodesList.bind(this);
+    this.toggleEpisodeViewed = this.toggleEpisodeViewed.bind(this);
 
     this.state = {
       seasonViewed: false,
       showEpisodes: false,
       episodesForSeason: []
     }
+  }
+
+  componentWillMount() {
+    console.log("DM => arges", arguments);
+    //TODO: set the season completed state...
   }
 
   setSeasonViewed(e) {
@@ -37,9 +43,19 @@ export default class Season extends Component {
     });
   }
 
+  toggleEpisodeViewed(episodeId, hasWatched){
+    const seasonNumber = this.props.season.season_number;
+
+    this.props.onWatchedEpisodes({
+      seasonNumber,
+      episodeId,
+    }, hasWatched);
+  }
+
   render() {
     const {
       season,
+      watched
     } = this.props; 
 
     return (
@@ -51,7 +67,7 @@ export default class Season extends Component {
         <div class="season--episodes-wrapper">
           <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>TOGGLE</button>
           <span class="season--episdoe-count">{season.episode_count} Episodes</span>
-          <EpisodesList episodes={this.state.episodesForSeason} />
+          <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watched} />
         </div>
       </div>
     );

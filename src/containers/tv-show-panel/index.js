@@ -5,13 +5,14 @@ import TvShowPoster from '../../components/tv-show-poster';
 import Season from '../../components/season';
 import { hideTvPanel } from '../../actions/tv-panel';
 import { addEpisodeToWatchedList, removeEpisodeFromWatchedList } from '../../actions/tv-shows-watched';
-
+         
 const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state.tvShowsWatched});
 
  class TvShowPanel extends Component {
   constructor(props) {
     super(props);
     this.closePanel = this.closePanel.bind(this);
+    this.sendWatched = this.sendWatched.bind(this);
   }
 
   closePanel() {
@@ -19,9 +20,29 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     dispatch(hideTvPanel());
   }
 
+  sendWatched(seasonAndEpisodeInfo, hasWatched) {
+    const { dispatch, panel } = this.props;
+    const { tvShow } = panel;
+
+    if (hasWatched) {
+      dispatch(addEpisodeToWatchedList({
+        showId: tvShow.id,
+        showTotalEpisodes: tvShow.number_of_episodes,
+        episodeInfo: seasonAndEpisodeInfo
+      }));
+    } else {
+      dispatch(removeEpisodeFromWatchedList({
+        showId: tvShow.id,
+        episodeInfo: seasonAndEpisodeInfo
+      }));
+    }
+  }
+
   render() {
     const { tvShow:show, visible} = this.props.panel;
+    const { watched } = this.props;
     let seasons;
+    const episodesWatched = watched[show.id];
 
     if (!visible) {
       return;
@@ -30,7 +51,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     if (show.seasons) {
       seasons = show.seasons.filter((season) => season.season_number > 0);
     }
-    
+
     return (
       <div class="to-view-list--info-panel-wrapper">
         <header class="tv-show-panel--header">
@@ -44,7 +65,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         </header>
         <section class="tv-show-panel--seasons-list">
           {seasons.map((season, index) => {
-            return <Season showId={show.id} season={season} onWatchedSeason={this.sendWatched}/>
+            return <Season showId={show.id} season={season} watched={episodesWatched} onWatchedEpisodes={this.sendWatched}/>
           })}
         </section>
     </div>

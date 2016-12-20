@@ -9,7 +9,7 @@ export default class EpisodesList extends Component {
   }
 
   handleToggleEpisode(episodeId, value) {
-    console.log("DM => Handling::", episodeId, value);
+    this.props.onToggleEpisode(episodeId, value);
   }
 
   render() {
