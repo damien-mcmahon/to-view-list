@@ -42,11 +42,12 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     const { tvShow:show, visible} = this.props.panel;
     const { watched } = this.props;
     let seasons;
-    const episodesWatched = watched[show.id];
 
     if (!visible) {
       return;
     }
+
+    const episodesWatched = watched[show.id];
 
     if (show.seasons) {
       seasons = show.seasons.filter((season) => season.season_number > 0);

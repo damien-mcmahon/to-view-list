@@ -17,11 +17,11 @@ export default class Season extends Component {
   }
 
   componentWillMount() {
-    console.log("DM => arges", arguments);
     //TODO: set the season completed state...
   }
 
   setSeasonViewed(e) {
+    //TODO: Set "ALL" for watched when this is pressed
     this.setState({
       seasonViewed: e.target.checked
     });
@@ -58,6 +58,7 @@ export default class Season extends Component {
       watched
     } = this.props; 
 
+    const watchedForSeason = watched ? watched.episodesViewed[season.season_number] : [];
     return (
       <div class="season--wrapper">
         <div class="season--overview-wrapper">
@@ -67,7 +68,7 @@ export default class Season extends Component {
         <div class="season--episodes-wrapper">
           <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>TOGGLE</button>
           <span class="season--episdoe-count">{season.episode_count} Episodes</span>
-          <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watched} />
+          <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} />
         </div>
       </div>
     );

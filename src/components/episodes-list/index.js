@@ -13,11 +13,14 @@ export default class EpisodesList extends Component {
   }
 
   render() {
-    const { episodes } = this.props;
-
+    const { episodes, watched } = this.props;
+    
     return(
       <ul class="episodes-list--wrapper">
-        {episodes.map((episode) => <EpisodeItem episode={episode} onToggleWatched={this.handleToggleEpisode} hasWatched={false}/>)}
+        {episodes.map((episode) => {
+          const hasWatched = watched ? watched.includes(episode.id) : false;
+          return <EpisodeItem episode={episode} onToggleWatched={this.handleToggleEpisode} hasWatched={hasWatched}/>
+        })}
       </ul>
     );
   }

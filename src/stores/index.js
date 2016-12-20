@@ -4,7 +4,6 @@ import reducers from '../reducers';
 import persistState from 'redux-localstorage'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const localStorageOptions = 'tvShows';
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk), persistState(localStorageOptions)));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk), persistState()));
 
 export default store;
