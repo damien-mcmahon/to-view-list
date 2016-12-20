@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import tvShows from './tv-show.js';
+import tvShows from './tv-show';
+import tvShowPanel from './tv-show-panel';
+import tvShowsWatched from './tv-shows-watched';
 
 export default combineReducers({
-  tvShows
+  tvShows,
+  tvShowPanel,
+  tvShowsWatched
 });

@@ -4,15 +4,19 @@ import { connect } from 'preact-redux';
 import TvSearch from '../../components/tv-search';
 import SearchResultList from '../../components/search-result-list';
 import TvShowList from '../../components/tv-show-list';
-import TvShowPanel from '../../components/tv-show-panel';
+import TvShowPanel from '../tv-show-panel';
 
 import TvShowAPIService from '../../data/tv-shows';
 import { 
   addTvShowToList, 
   removeTvShowFromList 
 } from '../../actions/tv-show';
+import {
+  showTvPanel,
+  hideTvPanel
+} from '../../actions/tv-panel'
 
-const appStateToProps = (state) => ({ showList: state.tvShows });
+const appStateToProps = (state) => ({ showList: state.tvShows, showPanel: state.tvShowPanel});
 
 class Home extends Component {
   constructor(props) {
@@ -24,8 +28,7 @@ class Home extends Component {
     this.panelCloseHandler = this.panelCloseHandler.bind(this);
 
     this.state = {
-      clearSearch: false,
-      panelToView: null
+      clearSearch: false
     };
   }
 
@@ -61,17 +64,13 @@ class Home extends Component {
   }
 
   showInfoPanel(tvShow) {
-    //get the episodes info for the show..
-
-    this.setState({
-      panelToView: tvShow,
-    });
+    const { dispatch } = this.props;
+    dispatch(showTvPanel(tvShow));
   }
 
   panelCloseHandler() {
-    this.setState({
-      panelToView: null
-    });
+    const { dispatch } = this.props;
+    dispatch(hideTvPanel());
   }
 
 	render() {
@@ -82,8 +81,8 @@ class Home extends Component {
         <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
         <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
         <TvShowList shows={shows} removeItem={this.removeItem} showInfoPanel={this.showInfoPanel}/>
-        {this.state.panelToView &&
-          <TvShowPanel show={this.state.panelToView} onClose={this.panelCloseHandler}/>
+        {this.props.showPanel.visible &&
+          <TvShowPanel />
         }
 			</div>
 		);
