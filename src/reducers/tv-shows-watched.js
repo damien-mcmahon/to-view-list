@@ -37,8 +37,28 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
         episodesViewed 
       };
       return state;
-    case REMOVE_EPISODE_WATCHED: 
 
+    case REMOVE_EPISODE_WATCHED: 
+      let showToRemove = action.showInfo;
+      let currentShow = state[showToRemove.showId];
+      let currentEpisodesViewed = currentShow.episodesViewed || [];
+      let currentSeasonNumber = `${showToRemove.episodeInfo.seasonNumber}`;
+
+      if(!currentEpisodesViewed[currentSeasonNumber].length) {
+        return state;
+      }
+      
+      //find the episode to remove...
+      currentEpisodesViewed[currentSeasonNumber] =
+         currentEpisodesViewed[currentSeasonNumber].filter((episodeId) => {
+          return episodeId !== showToRemove.episodeInfo.episodeId
+        });
+
+      state[currentShow.showId] = {
+        totalEpisodes: currentShow.totalEpisodes,
+        episodesViewed: currentEpisodesViewed
+      };
+      return state;
 
     default:
       return state;

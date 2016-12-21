@@ -9,7 +9,7 @@ export function addEpisodeToWatchedList(showInfo) {
   }
 }
 
-export function removeEpisodeFromWatchedList(showId, episodeInfo) {
+export function removeEpisodeFromWatchedList(showInfo) {
   return {
     type: REMOVE_EPISODE_WATCHED,
     showInfo
