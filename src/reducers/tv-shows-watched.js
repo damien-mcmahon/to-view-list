@@ -1,6 +1,7 @@
 import {
   ADD_EPISODE_WATCHED,
-  REMOVE_EPISODE_WATCHED
+  REMOVE_EPISODE_WATCHED,
+  ADD_SEASON_WATCHED
 } from '../actions/tv-shows-watched';
 
 const initialTVShowsWatchedState = {};
@@ -58,6 +59,9 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
         totalEpisodes: currentShow.totalEpisodes,
         episodesViewed: currentEpisodesViewed
       };
+      return state;
+
+    case ADD_SEASON_WATCHED:
       return state;
 
     default:

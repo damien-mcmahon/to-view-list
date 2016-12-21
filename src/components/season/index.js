@@ -5,26 +5,36 @@ import EpisodesList from '../episodes-list/';
 export default class Season extends Component {
   constructor(props) {
     super(props);
-    this.setSeasonViewed = this.setSeasonViewed.bind(this);
+    this.toggleSeasonViewed = this.toggleSeasonViewed.bind(this);
     this.toggleEpisodesList = this.toggleEpisodesList.bind(this);
     this.toggleEpisodeViewed = this.toggleEpisodeViewed.bind(this);
 
     this.state = {
-      seasonViewed: false,
       showEpisodes: false,
-      episodesForSeason: []
+      episodesForSeason: [],
+      episodesWatchedCount: 0
     }
   }
 
   componentWillMount() {
     //TODO: set the season completed state...
+    const { season, watched } = this.props;
+    const seasonEpisodesCount = season.episode_count;
+    const seasonNumber = season.season_number;
+    const episodesWatchedInSeason = watched.episodesViewed && watched.episodesViewed[seasonNumber] ? watched.episodesViewed[seasonNumber] : [];
+
+    this.setState({
+      episodesWatchedCount: episodesWatchedInSeason.length
+    });
   }
 
-  setSeasonViewed(e) {
+  toggleSeasonViewed(e) {
     //TODO: Set "ALL" for watched when this is pressed
-    this.setState({
-      seasonViewed: e.target.checked
-    });
+  }
+
+  checkSeasonIsWatched(props, state) {
+    const { season } = props;
+    return season.episode_count === state.episodesWatchedCount;
   }
 
   toggleEpisodesList() {
@@ -45,30 +55,37 @@ export default class Season extends Component {
 
   toggleEpisodeViewed(episodeId, hasWatched){
     const seasonNumber = this.props.season.season_number;
+    const currentEpisodeWatchedCount = this.state.episodesWatchedCount;
+    const newEpisodeCount = hasWatched ? currentEpisodeWatchedCount + 1 : currentEpisodeWatchedCount - 1; 
 
     this.props.onWatchedEpisodes({
       seasonNumber,
       episodeId,
     }, hasWatched);
+   
+    this.setState((prevState) => ({ episodesWatchedCount: newEpisodeCount }));
   }
 
-  render() {
+  render(props, state) {
     const {
       season,
       watched
     } = this.props; 
 
     const watchedForSeason = watched ? watched.episodesViewed[season.season_number] : [];
+    const seasonIsComplete = this.checkSeasonIsWatched(props, state);
     return (
       <div class="season--wrapper">
         <div class="season--overview-wrapper">
           <h1 class="season--count">Season {season.season_number}</h1>
-          <input type="checkbox" onClick={this.setSeasonViewed} checked={this.state.seasonViewed} />
+          <input type="checkbox" onClick={this.toggleSeasonViewed} checked={seasonIsComplete} />
         </div>
         <div class="season--episodes-wrapper">
           <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>TOGGLE</button>
           <span class="season--episdoe-count">{season.episode_count} Episodes</span>
-          <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} />
+          {this.state.showEpisodes &&
+            <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} />
+          }
         </div>
       </div>
     );
