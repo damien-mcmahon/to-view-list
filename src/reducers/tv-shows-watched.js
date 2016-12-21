@@ -10,7 +10,11 @@ const initialTVShowsWatchedState = {};
 //   showId: {
 //     totalEpisodes: Number,
 //     episodesViewed : {
-//        seasonNumber: ["episodeId",...]
+//        seasonNumber: {
+//          watched: ["episodeId",...]
+//          completed: boolean
+//          totalEpisodes: number
+//        }
 //     }
 //   } 
 //}
@@ -25,12 +29,16 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
       let totalEpisodes = show.totalEpisodes || newShow.showTotalEpisodes;
       let episodesViewed = show.episodesViewed || {};
       let seasonNumber = `${newShow.episodeInfo.seasonNumber}`;
-      let seasonEpisodeList = episodesViewed[seasonNumber] || [];
-      
+      let seasonInfo = episodesViewed[seasonNumber] || {
+        watched: [],
+        completed: false
+      };
+      let seasonEpisodeList = seasonInfo.watched; 
+
       seasonEpisodeList.push(newShow.episodeInfo.episodeId);
 
       if(!episodesViewed[seasonNumber]) {
-        episodesViewed[seasonNumber] = seasonEpisodeList;
+        episodesViewed[seasonNumber] = seasonInfo;
       }
 
       state[newShow.showId] = {
@@ -44,14 +52,17 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
       let currentShow = state[showToRemove.showId];
       let currentEpisodesViewed = currentShow.episodesViewed || [];
       let currentSeasonNumber = `${showToRemove.episodeInfo.seasonNumber}`;
-
-      if(!currentEpisodesViewed[currentSeasonNumber].length) {
+      let currentSeasonInfo = currentEpisodesViewed[currentSeasonNumber];
+  
+      if(!currentSeasonInfo && !currentSeasonInfo.watched.length) {
         return state;
       }
+
+      let watched = currentSeasonInfo.watched;
       
       //find the episode to remove...
       currentEpisodesViewed[currentSeasonNumber] =
-         currentEpisodesViewed[currentSeasonNumber].filter((episodeId) => {
+         watched.filter((episodeId) => {
           return episodeId !== showToRemove.episodeInfo.episodeId
         });
 
@@ -62,6 +73,26 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
       return state;
 
     case ADD_SEASON_WATCHED:
+      let newSeasonInfo = action.showInfo;
+      let tvShowToAddTo = state[newSeasonInfo.tvShow.id] || {};
+      let tvShowToAddTotalEpisodes = newSeasonInfo.tvShow.number_of_episodes;
+      let tvShowsWatched = tvShowToAddTo.episodesViewed || {}
+      let showsWatchedSeason = tvShowsWatched[newSeasonInfo.seasonNumber] || {
+        watched: [],
+        completed: false
+      };
+      
+      showsWatchedSeason.completed = true;
+
+      if(!tvShowsWatched[newSeasonInfo.seasonNumber]) {
+        tvShowsWatched[newSeasonInfo.seasonNumber] = showsWatchedSeason;
+      }
+
+      state[newSeasonInfo.tvShow.id] = {
+        totalEpisodes: tvShowToAddTotalEpisodes,
+        episodesViewed: tvShowsWatched 
+      };
+
       return state;
 
     default:

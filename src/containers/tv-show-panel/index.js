@@ -4,7 +4,11 @@ import { connect } from 'preact-redux';
 import TvShowPoster from '../../components/tv-show-poster';
 import Season from '../../components/season';
 import { hideTvPanel } from '../../actions/tv-panel';
-import { addEpisodeToWatchedList, removeEpisodeFromWatchedList } from '../../actions/tv-shows-watched';
+import { 
+  addEpisodeToWatchedList, 
+  removeEpisodeFromWatchedList, 
+  addSeasonToWatchedList 
+} from '../../actions/tv-shows-watched';
          
 const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state.tvShowsWatched});
 
@@ -13,6 +17,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     super(props);
     this.closePanel = this.closePanel.bind(this);
     this.sendWatched = this.sendWatched.bind(this);
+    this.sendSeasonWatched = this.sendSeasonWatched.bind(this);
   }
 
   closePanel() {
@@ -34,6 +39,18 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
       dispatch(removeEpisodeFromWatchedList({
         showId: tvShow.id,
         episodeInfo: seasonAndEpisodeInfo
+      }));
+    }
+  }
+
+  sendSeasonWatched(seasonNumber, hasWatched) {
+    const { dispatch, panel } = this.props;
+    const { tvShow } = panel;
+    
+    if (hasWatched) {
+      dispatch(addSeasonToWatchedList({
+        tvShow,
+        seasonNumber
       }));
     }
   }
@@ -66,7 +83,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         </header>
         <section class="tv-show-panel--seasons-list">
           {seasons.map((season, index) => {
-            return <Season showId={show.id} season={season} watched={episodesWatched} onWatchedEpisodes={this.sendWatched}/>
+            return <Season showId={show.id} season={season} watched={episodesWatched} onWatchedEpisodes={this.sendWatched} onWatchedSeason={this.sendSeasonWatched} />
           })}
         </section>
     </div>

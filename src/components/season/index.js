@@ -21,7 +21,7 @@ export default class Season extends Component {
     const { season, watched } = this.props;
     const seasonEpisodesCount = season.episode_count;
     const seasonNumber = season.season_number;
-    const episodesWatchedInSeason = watched.episodesViewed && watched.episodesViewed[seasonNumber] ? watched.episodesViewed[seasonNumber] : [];
+    const episodesWatchedInSeason = watched && watched.episodesViewed && watched.episodesViewed[seasonNumber] ? watched.episodesViewed[seasonNumber] : [];
 
     this.setState({
       episodesWatchedCount: episodesWatchedInSeason.length
@@ -30,6 +30,7 @@ export default class Season extends Component {
 
   toggleSeasonViewed(e) {
     //TODO: Set "ALL" for watched when this is pressed
+    this.props.onWatchedSeason(this.props.season.season_number, e.target.checked);
   }
 
   checkSeasonIsWatched(props, state) {
@@ -72,8 +73,9 @@ export default class Season extends Component {
       watched
     } = this.props; 
 
-    const watchedForSeason = watched ? watched.episodesViewed[season.season_number] : [];
+    const watchedForSeason = watched && watched.episodesViewed[season.season_number] ? watched.episodesViewed[season.season_number].watched : [];
     const seasonIsComplete = this.checkSeasonIsWatched(props, state);
+
     return (
       <div class="season--wrapper">
         <div class="season--overview-wrapper">
