@@ -7,7 +7,8 @@ import { hideTvPanel } from '../../actions/tv-panel';
 import { 
   addEpisodeToWatchedList, 
   removeEpisodeFromWatchedList, 
-  addSeasonToWatchedList 
+  addSeasonToWatchedList,
+  removeSeasonFromWatchedList 
 } from '../../actions/tv-shows-watched';
          
 const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state.tvShowsWatched});
@@ -52,6 +53,12 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         tvShow,
         seasonNumber
       }));
+    } else {
+
+      dispatch(removeSeasonFromWatchedList({
+        tvShow,
+        seasonNumber
+      }));
     }
   }
 
@@ -83,6 +90,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         </header>
         <section class="tv-show-panel--seasons-list">
           {seasons.map((season, index) => {
+            //TODO: Pass only the watched episodes for the season
             return <Season showId={show.id} season={season} watched={episodesWatched} onWatchedEpisodes={this.sendWatched} onWatchedSeason={this.sendSeasonWatched} />
           })}
         </section>
