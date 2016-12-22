@@ -1,0 +1,14 @@
+$input-bg: $theme-colour; 
+
+input {
+  background: rgba($input-bg, .25);
+  padding: 2.5px;
+  border-radius: 2.5px;
+  border: 1px solid transparent;
+
+
+  &:focus, &:active{
+    outline: 0;
+    background: rgba($input-bg, .75);
+  }
+}

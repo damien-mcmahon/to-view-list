@@ -1,6 +1,8 @@
+@import 'theme/dark';
 @import 'helpers/normalize';
 @import 'elements/buttons';
 @import 'elements/icons';
+@import 'elements/inputs';
 @import 'components/header';
 @import 'components/tv-search';
 @import 'components/search-results';
@@ -11,7 +13,9 @@
 @import 'components/episode-list';
 @import 'components/episode-item';
 
-$app-bg: #EEE;
+$app-bg: $theme-bg-colour;
+$app-colour: $theme-colour;
+
 a {
   text-decoration: none;
 }
@@ -19,7 +23,8 @@ a {
 #app {
   display: flex;
   flex-direction: column;
-  background: $app-bg;
+  background: linear-gradient(180deg, $app-bg 70%, darken($app-bg, 10%));
   height: 100%;
   font-family: 'Open Sans', sans-serif;
+  color: $app-colour;
 }

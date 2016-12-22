@@ -1,9 +1,11 @@
+$tv-show-item-bg: #EEE;
+
 .tv-show-list-item--wrapper {
   display: flex;
-  border-bottom: 1px solid #DDD;
   padding: 5px;
   flex-wrap: wrap;
-
+  background: $tv-show-item-bg;
+  
   .tv-show-poster--wrapper {
     width: 60px;
   }

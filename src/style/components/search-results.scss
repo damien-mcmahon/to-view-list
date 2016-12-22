@@ -1,23 +1,30 @@
-$search-list-bg: #FFF;
+$search-list-bg: $theme-black;
+$search-list-item-border-colour: $theme-white;
+$search-list-item-button-colour: $theme-green;
+$search-list-box-shadow: $theme-black;
 
 .search-result-list--wrapper {
+  position: absolute;
   list-style: none;
-  border: 1px solid #DDD;
   padding: 0;
   margin: 0;
-  background: $search-list-bg;
+  background: rgba($search-list-bg, .95);
+  width: 100%;
   max-width: 100%;
   overflow: auto;
+  max-height: 50vh;
+  z-index: 10;
+  box-shadow: 0px 5px 5px rgba($search-list-box-shadow, .5);
 
   .search-result-item--wrapper {
     display: flex;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid rgba($search-list-item-border-colour, .2);
     align-items: center;
 
     .search-result-item--name {
-      font-size: 14px;
+      font-size: 12px;
       text-transform: uppercase;
-      width: 60%;
+      flex: 1;
     }
   }
 
@@ -33,5 +40,9 @@ $search-list-bg: #FFF;
       transform: translateY(-25%);
       width: 100%;
     }
+  }
+  
+  .button {
+    margin: 0 5px;
   }
 }
