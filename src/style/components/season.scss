@@ -1,0 +1,17 @@
+.season--wrapper {
+  display: flex;
+  padding: 5px 0;
+
+  .season--overview-wrapper {
+    width: 30%;
+  }
+
+  .season--count {
+    font-size: 14px;
+  }
+
+  .season--episode-count {
+    display: inline-block;
+    font-size: 11px;
+  }
+}

@@ -16,7 +16,7 @@ export default class EpisodeItem extends Component {
 
     return (
       <li class="episode-item--wrapper">
-        <label>
+        <label class="episode-item--label">
           <input type="checkbox" onClick={this.sendWatched} checked={hasWatched} disabled={seasonComplete} /> {episode.name}
         </label>
       </li>

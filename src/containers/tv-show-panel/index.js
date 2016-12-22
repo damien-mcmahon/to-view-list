@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 
 import TvShowPoster from '../../components/tv-show-poster';
 import Season from '../../components/season';
+import TVIcon from '../../components/icon';
 import { hideTvPanel } from '../../actions/tv-panel';
 import { 
   addEpisodeToWatchedList, 
@@ -83,7 +84,9 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     return (
       <div class="to-view-list--info-panel-wrapper">
         <header class="tv-show-panel--header">
-          <button class="button tv-show-panel--close-button" onClick={this.closePanel}>Close</button>
+          <button class="button tv-show-panel--close-button" onClick={this.closePanel}>
+            <TVIcon iconName="cancel" />
+          </button>
           <TvShowPoster path={show.poster_path} tvShow={show.name} size="medium" />
           <div class="tv-show-panel--info-wrapper">
             <div class="tv-show-panel--title-wrapper">

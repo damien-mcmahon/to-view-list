@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import TvShowAPIService from '../../data/tv-shows';
 import EpisodesList from '../episodes-list/';
+import TVIcon from '../icon';
 
 export default class Season extends Component {
   constructor(props) {
@@ -65,6 +66,22 @@ export default class Season extends Component {
     this.setState((prevState) => ({ episodesWatchedCount: newEpisodeCount }));
   }
 
+  getButtonIcon(state) {
+    if (state.showEpisodes) {
+      return (
+        <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>
+          <TVIcon iconName="up-dir" />
+        </button>
+      );
+    } else {
+      return (
+        <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>
+          <TVIcon iconName="down-dir" />
+        </button>
+      );
+    }
+  }
+
   render(props, state) {
     const {
       season,
@@ -75,7 +92,6 @@ export default class Season extends Component {
     const watchedForSeason = watched && watched.episodesViewed[season.season_number] ? watched.episodesViewed[season.season_number].watched : [];
     const seasonComplete =
       watched && watched.episodesViewed[season.season_number] && watched.episodesViewed[season.season_number].completed ? watched.episodesViewed[season.season_number].completed : false;
-    
 
     return (
       <div class="season--wrapper">
@@ -84,9 +100,9 @@ export default class Season extends Component {
           <input type="checkbox" onClick={this.toggleSeasonViewed} checked={seasonComplete} />
         </div>
         <div class="season--episodes-wrapper">
-          <button class="button season--toggle-view-episodes" onClick={this.toggleEpisodesList}>TOGGLE</button>
-          <span class="season--episdoe-count">{season.episode_count} Episodes</span>
-          {this.state.showEpisodes &&
+          {this.getButtonIcon(state)}
+          <h2 class="season--episode-count">{season.episode_count} Episodes</h2>
+          {state.showEpisodes &&
             <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} seasonComplete={seasonComplete} />
           }
         </div>

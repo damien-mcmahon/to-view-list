@@ -1,0 +1,9 @@
+$icon-height: 16px;
+$icon-width: 16px;
+
+.isvg {
+  svg {
+    height: $icon-height;
+    width: $icon-width;
+  }
+}

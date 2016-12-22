@@ -1,10 +1,15 @@
+@import 'helpers/normalize';
 @import 'elements/buttons';
+@import 'elements/icons';
 @import 'components/header';
 @import 'components/tv-search';
 @import 'components/search-results';
 @import 'components/tv-show-poster';
 @import 'components/tv-show-list-item';
 @import 'components/tv-show-panel';
+@import 'components/season';
+@import 'components/episode-list';
+@import 'components/episode-item';
 
 $app-bg: #EEE;
 a {
