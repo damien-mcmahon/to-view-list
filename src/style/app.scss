@@ -17,6 +17,7 @@ $app-bg: $theme-bg-colour;
 $app-colour: $theme-colour;
 
 a {
+  color: $app-colour;
   text-decoration: none;
 }
 

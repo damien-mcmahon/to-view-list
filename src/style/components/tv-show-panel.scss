@@ -1,10 +1,13 @@
+$panel-bg: $theme-black;
+
 .to-view-list--info-panel-wrapper {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  background: #FFF;
-  box-shadow: 0px 5px 5px rgba(0,0,0,.2);
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: rgba($panel-bg, .95);
+  box-shadow: 0px 5px 5px rgba($panel-bg,.2);
   padding: 5px;
 
   .tv-show-poster--wrapper {
@@ -44,7 +47,7 @@
 
   .tv-show-panel--close-button {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 5px;
+    top: 5px;
   }
 }

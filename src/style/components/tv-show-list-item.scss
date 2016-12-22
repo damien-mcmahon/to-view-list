@@ -1,14 +1,21 @@
-$tv-show-item-bg: #EEE;
+$tv-show-item-border-colour: $theme-white;
+$tv-show-item-label-bg: $theme-light-blue;
+$tv-show-item-label-colour: $theme-white;
 
 .tv-show-list-item--wrapper {
   display: flex;
   padding: 5px;
   flex-wrap: wrap;
-  background: $tv-show-item-bg;
-  
+  border-bottom: 1px solid rgba($tv-show-item-border-colour, .2);
+
+  &:first-child {
+    border-top: 1px solid rgba($tv-show-item-border-colour, .2);
+  }
+
   .tv-show-poster--wrapper {
     width: 60px;
   }
+
   .tv-show-list-item--info-section-wrapper {
     display: flex;
     flex-direction: column;
@@ -22,7 +29,7 @@ $tv-show-item-bg: #EEE;
     display: inline-flex;
     justify-content: space-between;
     padding: 0 5px;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .tv-show-list-item--progress-wrapper {
@@ -38,10 +45,10 @@ $tv-show-item-bg: #EEE;
   .tv-show-list-item--seasons,
   .tv-show-list-item--episodes, 
   .tv-show-list-item--day-of-week {
-    font-size: 11px;
-    background: #CCC;
-    color: #FFF;
-    padding: 2.5px;
+    font-size: 10px;
+    background: $tv-show-item-label-bg;
+    color: $tv-show-item-label-colour;
+    padding: 2.5px 5px;
     border-radius: 5px;
     display: inline;
   }

@@ -1,9 +1,11 @@
-$icon-height: 16px;
-$icon-width: 16px;
+$icon-height: 13px;
+$icon-width: 13px;
+$icon-fill: $theme-white;
 
 .isvg {
   svg {
     height: $icon-height;
     width: $icon-width;
+    fill: $icon-fill;
   }
 }
