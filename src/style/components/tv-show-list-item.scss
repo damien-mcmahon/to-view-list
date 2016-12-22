@@ -34,6 +34,12 @@ $tv-show-item-bg: $theme-black;
     align-items: center;
   }
 
+  .tv-show-list-item--actions-wrapper {
+    .button {
+      margin-left: 5px;
+    }
+  }
+
   .tv-show-list-item--progress-wrapper {
   }
 

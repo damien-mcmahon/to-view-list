@@ -43,12 +43,14 @@ export default class TvShowListItem extends Component {
             {show.networks.map((network) => {
               <span class="tv-show-list-item--network-name">{network.name}</span>
             })}
-            <button class="button tv-show-list-item--info" onClick={this.showInfoPanel}>
-              <TVIcon iconName="info" />
-            </button>
-            <button class="button tv-show-list-item--remove" onClick={this.removeButtonClickHandler}>
-              <TVIcon iconName="cancel" />
-            </button>
+            <div class="tv-show-list-item--actions-wrapper">
+              <button class="button tv-show-list-item--info" onClick={this.showInfoPanel}>
+                <TVIcon iconName="info" />
+              </button>
+              <button class="button tv-show-list-item--remove" onClick={this.removeButtonClickHandler}>
+                <TVIcon iconName="cancel" />
+              </button>
+            </div>
           </div>
           <div class="tv-show-list-item--info-wrapper">
             <span class="tv-show-list-item--seasons">{show.number_of_seasons} seasons</span>
