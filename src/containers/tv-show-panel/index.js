@@ -14,6 +14,7 @@ import {
 const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state.tvShowsWatched});
 
  class TvShowPanel extends Component {
+
   constructor(props) {
     super(props);
     this.closePanel = this.closePanel.bind(this);
@@ -34,12 +35,14 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
       dispatch(addEpisodeToWatchedList({
         showId: tvShow.id,
         showTotalEpisodes: tvShow.number_of_episodes,
-        episodeInfo: seasonAndEpisodeInfo
+        episodeInfo: seasonAndEpisodeInfo,
+        episodesInSeason : tvShow.seasons[seasonAndEpisodeInfo.seasonNumber].episode_count
       }));
     } else {
       dispatch(removeEpisodeFromWatchedList({
         showId: tvShow.id,
-        episodeInfo: seasonAndEpisodeInfo
+        episodeInfo: seasonAndEpisodeInfo,
+        episodesInSeason : tvShow.seasons[seasonAndEpisodeInfo.seasonNumber].episode_count
       }));
     }
   }

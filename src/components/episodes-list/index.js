@@ -19,7 +19,7 @@ export default class EpisodesList extends Component {
       <ul class="episodes-list--wrapper">
         {episodes.map((episode) => {
           let hasWatched; 
-          if(seasonComplete) {
+          if (seasonComplete) {
             hasWatched = true;
           } else {
             hasWatched = watched ? watched.includes(episode.id) : false;

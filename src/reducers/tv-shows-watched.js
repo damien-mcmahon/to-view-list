@@ -31,9 +31,12 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
   let seasonInfo;
   let seasonEpisodeList;
   let showsWatchedSeason
+  let totalEpisodesInSeason;
+
   switch(action.type) {
     case ADD_EPISODE_WATCHED: 
       newShow = action.showInfo;
+      totalEpisodesInSeason = newShow.episodesInSeason;
       show = state[newShow.showId] || {};
       totalEpisodes = show.totalEpisodes || newShow.showTotalEpisodes;
       episodesViewed = show.episodesViewed || {};
@@ -50,6 +53,10 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
         episodesViewed[seasonNumber] = seasonInfo;
       }
 
+      if (seasonInfo.watched.length === totalEpisodesInSeason) {
+        seasonInfo.completed = true; 
+      }
+
       state[newShow.showId] = {
         totalEpisodes,
         episodesViewed 
@@ -57,12 +64,13 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
       return state;
 
     case REMOVE_EPISODE_WATCHED: 
-      debugger;
       newShow = action.showInfo;
       show = state[newShow.showId];
       episodesViewed = show.episodesViewed || [];
       seasonNumber = `${newShow.episodeInfo.seasonNumber}`;
       seasonInfo = episodesViewed[seasonNumber];
+      totalEpisodesInSeason = newShow.episodesInSeason;
+
   
       if(!seasonInfo && !seasonInfo.watched.length) {
         return state;
@@ -76,10 +84,13 @@ export default function tvShowsWatched(state = initialTVShowsWatchedState, actio
           return episodeId !== newShow.episodeInfo.episodeId
         });
 
+      seasonInfo.completed = watched.length === totalEpisodesInSeason;
+
       state[show.showId] = {
         totalEpisodes: show.totalEpisodes,
         episodesViewed
       };
+
       return state;
 
     case ADD_SEASON_WATCHED:
