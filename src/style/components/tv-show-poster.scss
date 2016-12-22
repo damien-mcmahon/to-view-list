@@ -1,7 +1,12 @@
+$poster-bg: $theme-white;
+
 .tv-show-poster--wrapper {
   overflow: hidden;
+  text-align: center;
+  background: rgba($poster-bg, .1);
 
   .tv-show-poster {
     width: 100%;
+    font-size: 8px;
   }
 }
