@@ -2,10 +2,11 @@ $button-action-add-bg: $theme-green;
 $button-action-add-colour: #FFF;
 
 .button {
-  border-radius: 5px;
+  border-radius: 50%;
   background: transparent;
   border: 1px solid #CCC;
-  padding: 2.5px 5px;
+  padding: 2.5px 3px;
+  line-height: 13px;
 
   &:focus, &:active {
     outline: none;
