@@ -24,7 +24,7 @@ export default class EpisodesList extends Component {
           } else {
             hasWatched = watched ? watched.includes(episode.id) : false;
           }
-          return <EpisodeItem episode={episode} onToggleWatched={this.handleToggleEpisode} hasWatched={hasWatched}/>
+          return <EpisodeItem episode={episode} onToggleWatched={this.handleToggleEpisode} hasWatched={hasWatched} seasonComplete={seasonComplete} />
         })}
       </ul>
     );

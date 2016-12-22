@@ -12,12 +12,12 @@ export default class EpisodeItem extends Component {
   }
 
   render() {
-    const { episode, hasWatched } = this.props;
+    const { episode, hasWatched, seasonComplete } = this.props;
 
     return (
       <li class="episode-item--wrapper">
         <label>
-          <input type="checkbox" onClick={this.sendWatched} checked={hasWatched} /> {episode.name}
+          <input type="checkbox" onClick={this.sendWatched} checked={hasWatched} disabled={seasonComplete} /> {episode.name}
         </label>
       </li>
     );
