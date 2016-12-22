@@ -2,6 +2,7 @@ $home-tv-list-height: 80vh;
 $home-search-height: 12.5vh;
 $home-tv-list-wrapper-height: 92.5vh;
 $home-tv-list-empty-bg: $theme-black;
+$home-search-wrapper-height: 7.5vh;
 
 .to-view-list--home--wrapper {
   height: $home-tv-list-wrapper-height;
@@ -17,7 +18,16 @@ $home-tv-list-empty-bg: $theme-black;
   }
 }
 
+.home-view--search-wrapper {
+  height: $home-search-wrapper-height;
+  position: relative;
+}
+
 .tv-search--wrapper {
   margin: 0;
   height: $home-search-height;
+}
+
+.search-result-list--wrapper {
+  top: $home-search-wrapper-height;
 }

@@ -78,8 +78,10 @@ class Home extends Component {
     
 		return (
 			<div class="to-view-list--home--wrapper">
-        <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
-        <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
+        <div class="home-view--search-wrapper">
+          <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
+          <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
+        </div>
         <TvShowList shows={shows} removeItem={this.removeItem} showInfoPanel={this.showInfoPanel}/>
         {this.props.showPanel.visible &&
           <TvShowPanel />
