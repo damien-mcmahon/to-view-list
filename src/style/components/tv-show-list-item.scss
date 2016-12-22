@@ -1,12 +1,14 @@
 $tv-show-item-border-colour: $theme-white;
 $tv-show-item-label-bg: $theme-light-blue;
 $tv-show-item-label-colour: $theme-white;
+$tv-show-item-bg: $theme-black;
 
 .tv-show-list-item--wrapper {
   display: flex;
   padding: 5px;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba($tv-show-item-border-colour, .2);
+  background: linear-gradient(180deg, transparent, rgba($tv-show-item-bg, .5));
 
   &:first-child {
     border-top: 1px solid rgba($tv-show-item-border-colour, .2);

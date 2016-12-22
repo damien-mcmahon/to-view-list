@@ -1,0 +1,23 @@
+$home-tv-list-height: 80vh;
+$home-search-height: 12.5vh;
+$home-tv-list-wrapper-height: 92.5vh;
+$home-tv-list-empty-bg: $theme-black;
+
+.to-view-list--home--wrapper {
+  height: $home-tv-list-wrapper-height;
+}
+
+.tv-show-list--wrapper {
+  height: $home-tv-list-height;
+  overflow: scroll;
+
+  &:empty {
+    transition: background .35s .35s;
+    background: rgba($home-tv-list-empty-bg, .25);
+  }
+}
+
+.tv-search--wrapper {
+  margin: 0;
+  height: $home-search-height;
+}

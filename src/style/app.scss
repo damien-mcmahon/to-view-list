@@ -12,6 +12,7 @@
 @import 'components/season';
 @import 'components/episode-list';
 @import 'components/episode-item';
+@import 'views/home';
 
 $app-bg: $theme-bg-colour;
 $app-colour: $theme-colour;
@@ -21,11 +22,18 @@ a {
   text-decoration: none;
 }
 
+html,
+body {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
 #app {
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, $app-bg 70%, darken($app-bg, 10%));
   height: 100%;
+  max-height: 100vh;
   font-family: 'Open Sans', sans-serif;
   color: $app-colour;
 }
