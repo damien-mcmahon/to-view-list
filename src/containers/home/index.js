@@ -16,7 +16,11 @@ import {
   hideTvPanel
 } from '../../actions/tv-panel'
 
-const appStateToProps = (state) => ({ showList: state.tvShows, showPanel: state.tvShowPanel});
+const appStateToProps = (state) => ({
+  showList: state.tvShows,
+  showPanel: state.tvShowPanel,
+  watchedShows: state.tvShowsWatched
+});
 
 class Home extends Component {
   constructor(props) {
@@ -73,16 +77,20 @@ class Home extends Component {
     dispatch(hideTvPanel());
   }
 
-	render() {
-    let shows = this.props.showList;
-    
+	render(props, state) {
+    const { showList:shows, watchedShows } = props;
 		return (
 			<div class="to-view-list--home--wrapper">
         <div class="home-view--search-wrapper">
           <TvSearch searchFor={this.doSearch} clearSearch={this.state.clearSearch}/>
           <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
         </div>
-        <TvShowList shows={shows} removeItem={this.removeItem} showInfoPanel={this.showInfoPanel}/>
+        <TvShowList
+         shows={shows} 
+         watchedShows={props.watchedShows}
+         removeItem={this.removeItem} 
+         showInfoPanel={this.showInfoPanel}
+        />
         {this.props.showPanel.visible &&
           <TvShowPanel />
         }

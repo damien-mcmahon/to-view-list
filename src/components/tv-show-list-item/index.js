@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import moment from 'moment';
 import TvShowPoster from '../tv-show-poster/';
 import TVIcon from '../icon';
+import ProgressBar from '../progress';
 
 const STATUS_TO_CSS_MAP = {
   'ended': '--has-ended',
@@ -29,9 +30,26 @@ export default class TvShowListItem extends Component {
     return airDate.format('dddd');
   }
 
-  render() {
-    const show = this.props.show;
+  countEpisodesWatched(show, watchedEpisodes = {}) {
+    //loop over each season watched
+    const { episodesViewed } = watchedEpisodes; 
+
+    if (!episodesViewed || !watchedEpisodes) {
+      return 0;
+    }
+    const seasons = Object.keys(episodesViewed);
+
+    return seasons.reduce((totalCount, seasonNumber) => {
+      const episodesToAddToCount = episodesViewed[seasonNumber].completed ? show.seasons[seasonNumber].episode_count : episodesViewed.watched.length;
+      return totalCount + episodesToAddToCount;
+    }, 0);
+  }
+
+  render(props) {
+    const { show, watchedInfo } = props;
     const cssStatusClass = STATUS_TO_CSS_MAP[show.status.toLowerCase()];
+    const episodesWatchedCount = this.countEpisodesWatched(show, watchedInfo);
+   
     return (
       <div class={`tv-show-list-item--wrapper ${cssStatusClass}`}>
         <TvShowPoster path={show.poster_path} tvShow={show.name} size="medium" />
@@ -60,6 +78,7 @@ export default class TvShowListItem extends Component {
             }
           </div>
           <div class="tv-show-list-item--progress-wrapper">
+            <ProgressBar total={show.number_of_episodes} progress={episodesWatchedCount} /> 
           </div>
         </div>
       </div>

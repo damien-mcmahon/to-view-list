@@ -16,13 +16,18 @@ export default class TvShowList extends Component {
     this.props.showInfoPanel(item);
   }
 
-  render() {
-    const {shows} = this.props;
+  render(props, state) {
+    const { shows, watchedShows } = props;
 
     return (
       <div class="tv-show-list--wrapper">
         {shows.map((show) => {
-          return <TvShowListItem show={show}  onRemove={this.removeItemHandler} onInfoClick={this.showItemHandler}/>
+          const watchedInfo = watchedShows[show.id];
+          return <TvShowListItem 
+                    show={show} 
+                    watchedInfo={watchedInfo}
+                    onRemove={this.removeItemHandler} 
+                    onInfoClick={this.showItemHandler}/>
         })}
       </div>
     );
