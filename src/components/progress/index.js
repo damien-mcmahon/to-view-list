@@ -3,7 +3,7 @@ import { h, Component } from 'preact';
 export default class ProgressBar extends Component {
   render(props) {
     const { total, progress } = props;
-    const progressWidth = Number(progress/total * 100).toFixed(2);
+    const progressWidth = Math.round(Number(progress/total * 100).toFixed(0));
 
     return (
       <div class="progress-bar--wrapper">

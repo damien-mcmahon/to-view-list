@@ -40,7 +40,9 @@ export default class TvShowListItem extends Component {
     const seasons = Object.keys(episodesViewed);
 
     return seasons.reduce((totalCount, seasonNumber) => {
-      const episodesToAddToCount = episodesViewed[seasonNumber].completed ? show.seasons[seasonNumber].episode_count : episodesViewed.watched.length;
+      const episodesToAddToCount =
+        episodesViewed[seasonNumber].completed ? 
+          show.seasons[seasonNumber].episode_count : episodesViewed[seasonNumber].watched.length;
       return totalCount + episodesToAddToCount;
     }, 0);
   }

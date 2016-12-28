@@ -58,12 +58,12 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         seasonNumber
       }));
     } else {
-
       dispatch(removeSeasonFromWatchedList({
         tvShow,
         seasonNumber
       }));
     }
+    this.setState();
   }
 
   render() {

@@ -7,14 +7,14 @@ $progress-bar-default-bg: #CCC;
   width: 100%;
   border-radius: 2.5px;
   background: rgba($progress-bar-bg, .2);
-  height: 10px;
+  height: 5px;
   position: relative;
  
   .progress-bar--label {
     font-size: 10px;
     position: absolute;
     right: 0;
-    top: -10px;
+    top: -12.5px;
   } 
 
   .progress-bar {
