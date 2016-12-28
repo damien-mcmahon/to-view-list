@@ -8,6 +8,10 @@ export default class TvSearch extends Component {
     super(props);
     this.search = this.search.bind(this);
     this.timeout = null;
+
+    this.state = {
+      searchTerm:  ''
+    }
   }
 
   search(e) {
@@ -37,10 +41,12 @@ export default class TvSearch extends Component {
     }
   }
 
-  render() {
+  render(props, state) {
+    const searchTerm = state.clearSearch ? '' : state.searchTerm;
+
     return (
       <div class="tv-search--wrapper">
-        <input type="search" class="tv-search--input" placeholder="Breaking Bad" onInput={this.search} />
+        <input type="search" class="tv-search--input" placeholder="Breaking Bad" onInput={this.search} value={searchTerm} />
       </div>
     );
   }
