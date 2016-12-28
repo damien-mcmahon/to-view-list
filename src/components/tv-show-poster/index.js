@@ -8,13 +8,24 @@ const SIZES = {
 };
 
 export default class TvShowPoster extends Component {
+  constructor(props) {
+    super(props);
+    this.sendClick = this.sendClick.bind(this);
+  }
+
+  sendClick() {
+    if (this.props.onClick) {
+      this.props.onClick();
+    }
+  }
+
   render() {
     const tvShowName = this.props.tvShow;
     const posterSize = this.props.size;
     const posterPath = `${BASE_URL}${SIZES[this.props.size]}${this.props.path}`;
 
     return (
-      <div class="tv-show-poster--wrapper">
+      <div class="tv-show-poster--wrapper" onClick={this.sendClick}>
         <img src={posterPath} alt={`Poster for ${tvShowName}`} class={`tv-show-poster tv-show-poster--${posterSize}`} />
       </div>
     );

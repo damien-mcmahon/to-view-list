@@ -9,6 +9,11 @@ const STATUS_TO_CSS_MAP = {
   'returning series': '--is-returning'
 };
 
+const AIRED_DATE_FORMAT = 'dddd';
+const RADIX = 10;
+const ZERO = 0;
+const POSTER_SIZE = "medium";
+
 export default class TvShowListItem extends Component {
   constructor(props) {
     super(props);
@@ -26,25 +31,24 @@ export default class TvShowListItem extends Component {
 
   dayOfWeekAired(show) {
     let airDate = new moment(show.last_air_date);
-
-    return airDate.format('dddd');
+    return airDate.format(AIRED_DATE_FORMAT);
   }
 
   countEpisodesWatched(show, watchedEpisodes = {}) {
-    //loop over each season watched
     const { episodesViewed } = watchedEpisodes; 
 
     if (!episodesViewed || !watchedEpisodes) {
-      return 0;
+      return ZERO;
     }
     const seasons = Object.keys(episodesViewed);
 
     return seasons.reduce((totalCount, seasonNumber) => {
+      const showSeason = show.seasons.find((season) => season.season_number === parseInt(seasonNumber, RADIX))
       const episodesToAddToCount =
         episodesViewed[seasonNumber].completed ? 
-          show.seasons[seasonNumber].episode_count : episodesViewed[seasonNumber].watched.length;
+          showSeason.episode_count : episodesViewed[seasonNumber].watched.length;
       return totalCount + episodesToAddToCount;
-    }, 0);
+    }, ZERO);
   }
 
   render(props) {
@@ -54,11 +58,16 @@ export default class TvShowListItem extends Component {
    
     return (
       <div class={`tv-show-list-item--wrapper ${cssStatusClass}`}>
-        <TvShowPoster path={show.poster_path} tvShow={show.name} size="medium" />
+        <TvShowPoster 
+          path={show.poster_path}
+          tvShow={show.name}
+          size={POSTER_SIZE}
+          onClick={this.showInfoPanel}
+         />
         <div class="tv-show-list-item--info-section-wrapper">
           <div class="tv-show-list-item--title-wrapper">
             <h1 class="tv-show-list-item--title">
-              <a href={show.homepage} target="_blank">{show.name}</a>
+              {show.name}
             </h1>
             {show.networks.map((network) => {
               <span class="tv-show-list-item--network-name">{network.name}</span>

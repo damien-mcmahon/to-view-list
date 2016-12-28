@@ -16,7 +16,12 @@ export default class SearchResultItem extends Component {
     const result = this.props.result || {}
     return (
       <li class="search-result-item--wrapper">
-        <TvShowPoster path={result.poster_path} tvShow={result.name} size="small" />
+        <TvShowPoster 
+          path={result.poster_path} 
+          tvShow={result.name} 
+          size="small" 
+          onClick={this.sendItem} 
+        />
         <h1 class="search-result-item--name">{result.name}</h1>
         <button class="button --action-add search-result-item--add-to-list" onClick={this.sendItem}>
           <TVIcon iconName="plus" />
