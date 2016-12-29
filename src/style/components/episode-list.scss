@@ -3,7 +3,7 @@
   padding: 5px; 
   list-style: none;
 
-  .episodes-list--item {
-    border: 1px solid red;
+  .episode-item--wrapper:first-child {
+    margin-top: 0;
   }
 }

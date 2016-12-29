@@ -1,6 +1,29 @@
+$episode-air-date-colour: rgba($theme-white, .5);
+
 .episode-item--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
 
   .episode-item--label {
-    font-size: 12px;
+    font-size: 10px;
+    width: 75%;
+    margin-top: 2.5px;
   }
+
+  input {
+    vertical-align: middle;
+  }
+
+  .episode-item--number {
+    margin-left: 5px;
+    color: $episode-air-date-colour;
+  }
+
+  .episode-item--air-date {
+    font-size: 9px;
+    color: $episode-air-date-colour;
+  }
+
 }
