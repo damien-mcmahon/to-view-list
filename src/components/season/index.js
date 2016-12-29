@@ -1,7 +1,11 @@
 import { h, Component } from 'preact';
+import moment from 'moment';
+import 'moment-duration-format';
 import TvShowAPIService from '../../data/tv-shows';
 import EpisodesList from '../episodes-list/';
 import TVIcon from '../icon';
+
+const ONE_MINUTE = 60 * 1000;
 
 export default class Season extends Component {
   constructor(props) {
@@ -30,16 +34,15 @@ export default class Season extends Component {
   }
 
   toggleSeasonViewed(e) {
-    //TODO: Set "ALL" for watched when this is pressed
     this.props.onWatchedSeason(this.props.season.season_number, e.target.checked);
     this.setState();
   }
 
   toggleEpisodesList() {
     if (!this.state.showEpisodes && !this.state.episodesForSeason.length) {
-      const { season, showId } = this.props;
+      const { season, show } = this.props;
       //get the episodes from the server
-      TvShowAPIService.getEpisodesForShow(showId, season.season_number).then((episodesInfo) => {
+      TvShowAPIService.getEpisodesForShow(show.id, season.season_number).then((episodesInfo) => {
         this.setState({
           episodesForSeason: episodesInfo.episodes
         });
@@ -82,26 +85,38 @@ export default class Season extends Component {
     }
   }
 
+  calculateSeasonDuration(show, season) {
+    const averageShowDuration = show.episode_run_time.reduce((count, runTime) => count + runTime, 0) / show.episode_run_time.length;
+    const seasonDuration = averageShowDuration * season.episode_count * ONE_MINUTE;
+    return new moment.duration(seasonDuration).format('H ');
+  }
+
   render(props, state) {
     const {
       season,
-      watched
+      watched,
+      show
     } = this.props; 
 
     //TODO: This is horrible. Make it less so.
     const watchedForSeason = watched && watched.episodesViewed[season.season_number] ? watched.episodesViewed[season.season_number].watched : [];
     const seasonComplete =
       watched && watched.episodesViewed[season.season_number] && watched.episodesViewed[season.season_number].completed ? watched.episodesViewed[season.season_number].completed : false;
-
+    const seasonDuration = this.calculateSeasonDuration(show, season);
     return (
       <div class="season--wrapper">
         <div class="season--overview-wrapper">
+          {this.getButtonIcon(state)}
+          <input class="season--season-complete" type="checkbox" onClick={this.toggleSeasonViewed} checked={seasonComplete} />
           <h1 class="season--count">Season {season.season_number}</h1>
-          <input type="checkbox" onClick={this.toggleSeasonViewed} checked={seasonComplete} />
+          <h2 class="season--episode-count">{season.episode_count} Episodes</h2>
+          <h3 class="season--season-duration">
+            <TVIcon iconName="clock" />
+            {seasonDuration}
+            <span class="season--season-duration--units-label">Hours</span>
+          </h3>
         </div>
         <div class="season--episodes-wrapper">
-          {this.getButtonIcon(state)}
-          <h2 class="season--episode-count">{season.episode_count} Episodes</h2>
           {state.showEpisodes &&
             <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} seasonComplete={seasonComplete} />
           }

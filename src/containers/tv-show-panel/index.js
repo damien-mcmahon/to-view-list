@@ -166,7 +166,12 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
         <section class="tv-show-panel--seasons-list">
           {seasons.map((season, index) => {
             //TODO: Pass only the watched episodes for the season
-            return <Season showId={show.id} season={season} watched={episodesWatched} onWatchedEpisodes={this.sendWatched} onWatchedSeason={this.sendSeasonWatched} />
+            return <Season 
+                    show={show} 
+                    season={season} 
+                    watched={episodesWatched} 
+                    onWatchedEpisodes={this.sendWatched} 
+                    onWatchedSeason={this.sendSeasonWatched} />
           })}
         </section>
     </div>
