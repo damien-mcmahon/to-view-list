@@ -1,3 +1,17 @@
+# To-View List #
+This is a twist on the usual to-do list that most Javscript frameworks use as a benchmark for how easy they are to use.
+This is just an exploration of using Preact with Redux and Webpack. Below are instructions on how to get this repo running.
+
+## To-Do List ##
+- [] Add Tests
+- [] Add appcache / Service Worker
+- [] 100% PWA compatibility
+- [] Optimise using `shouldComponentUpdate` etc
+- [] Clean up code to clearly separate logic from rendering
+- [] Properly use `linkState` etc that preact brings
+- [] Add extra features
+
+
 # Preact Boilerplate / Starter Kit
 
 [![Build Status](https://travis-ci.org/developit/preact-boilerplate.svg?branch=master)](https://travis-ci.org/developit/preact-boilerplate)
