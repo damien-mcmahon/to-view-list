@@ -1,5 +1,6 @@
 @import 'theme/dark';
 @import 'helpers/normalize';
+@import 'mixins/networks';
 @import 'elements/buttons';
 @import 'elements/icons';
 @import 'elements/inputs';
@@ -9,6 +10,7 @@
 @import 'components/tv-show-poster';
 @import 'components/tv-show-list-item';
 @import 'components/tv-show-panel';
+@import 'components/network-badge';
 @import 'components/season';
 @import 'components/episode-list';
 @import 'components/episode-item';

@@ -1,0 +1,34 @@
+$networks: (
+  'amc': (
+    background: #D7D489,
+    color: #222
+  ),
+  'netflix': (
+    background: #E50914,
+    color: #FFF
+  ),
+  'cbs': (
+    background: #FFF,
+    color: #111
+  ),
+  'bbc-one': (
+    background: #DF180E,
+    color: #FFF
+  ),
+  'hbo': (
+    background: #111
+  )
+);
+$lighten-colour: #FFF;
+$lighten-percent: 25%;
+
+@mixin network-colours($network-name) {
+  $network-values: map_get($networks, $network-name);
+  @each $key, $value in $network-values {
+    @if $key == 'background' {
+      #{$key}: linear-gradient(180deg, mix($lighten-colour, $value, $lighten-percent), #{$value});
+    } @else {
+      #{$key}: #{$value};
+    }
+  }
+}

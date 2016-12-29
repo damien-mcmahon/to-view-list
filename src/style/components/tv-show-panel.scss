@@ -1,13 +1,16 @@
 $panel-bg: $theme-black;
 $panel-border: $theme-white;
+$tv-show-panel-label-colour: $theme-white;
 
 .to-view-list--info-panel-wrapper {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 5px;
   left: 5px;
   right: 5px;
   bottom: 5px;
-  background: linear-gradient(0deg, rgba($panel-bg, .8) 10%, $panel-bg);
+  background: linear-gradient(0deg, rgba($panel-bg, .9) 10%, $panel-bg);
   box-shadow: 0px 5px 5px rgba($panel-bg,.5);
   border-radius: 2.5px;
   padding: 5px;
@@ -19,9 +22,6 @@ $panel-border: $theme-white;
     vertical-align: text-top;
   }
 
-  .tv-show-panel--seasons-list {
-    min-height: 350px;
-  }
   
   .tv-show-panel--header {
     display: flex;
@@ -36,9 +36,9 @@ $panel-border: $theme-white;
   }
 
   .tv-show-panel--title {
-    display: inline-block;
     font-size: 14px;
     text-transform: uppercase;
+    margin-right: 15px;
   }
 
   .tv-show-panel--overview {
@@ -52,5 +52,41 @@ $panel-border: $theme-white;
     position: absolute;
     right: 5px;
     top: 5px;
+  }
+
+  .tv-show-panel--show-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tv-show-panel--show-day-of-week,
+  .tv-show-panel--runtime,
+  .tv-show-panel--last-aired-date {
+    margin-top: 5px;
+    font-size: 12px;
+
+    .isvg {
+      svg {
+        margin: 2.5px 5px 2.5px 0;
+        height: 16px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .tv-show-panel--info-label {
+    font-size: 10px;
+    vertical-align: middle;
+    display: block;
+    color: rgba($tv-show-panel-label-colour, .5);
+  }
+
+  .tv-show-panel--seasons-list {
+    flex: 1;
+    min-height: 350px;
+    overflow: auto;
+    border-top: 1px solid rgba($panel-border, .2);
+    margin-top: 5px;
   }
 }

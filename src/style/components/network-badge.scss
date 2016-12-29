@@ -1,0 +1,37 @@
+$network-default-bg: $theme-blue;
+$network-colour: $theme-white;
+//network colours
+
+.network-badge {
+  font-size: 12px;
+  background: $network-default-bg;
+  color: $network-colour;
+  width: auto;
+  padding: 2px 5px;
+  margin: 5px 0 0 0;
+  border-radius: 2.5px;
+  font-weight: bold;
+  display: inline-block;
+
+  //TODO: Mixin with a map for the values
+  &.--network-amc {
+    @include network-colours('amc'); 
+  }
+
+  &.--network-netflix {
+    @include network-colours('netflix');
+  }
+
+  &.--network-hbo {
+    @include network-colours('hbo');
+  }
+  
+  &.--network-cbs {
+    @include network-colours('cbs');
+  }
+
+  &.--network-bbc-one {
+    @include network-colours('bbc-one');
+  }
+}
+
