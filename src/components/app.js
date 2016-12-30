@@ -4,6 +4,7 @@ import { Provider, connect } from 'preact-redux';
 
 import Header from './header';
 import Home from '../containers/home';
+import About from '../containers/about';
 
 import style from '../style';
 
@@ -22,6 +23,7 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+          <About path="/about" />
 				</Router>
 			</div>
 		);

@@ -5,6 +5,7 @@ import TvSearch from '../../components/tv-search';
 import SearchResultList from '../../components/search-result-list';
 import TvShowList from '../../components/tv-show-list';
 import TvShowPanel from '../tv-show-panel';
+import SummaryFooter from '../../components/summary-footer';
 
 import TvShowAPIService from '../../data/tv-shows';
 import { 
@@ -94,6 +95,7 @@ class Home extends Component {
         {this.props.showPanel.visible &&
           <TvShowPanel />
         }
+        <SummaryFooter shows={shows} watched={props.watchedShows} />
 			</div>
 		);
 	}

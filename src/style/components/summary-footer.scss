@@ -1,0 +1,22 @@
+$summary-footer-label-colour: rgba($theme-white, .5);
+
+.to-view-list--summary-footer {
+  display: flex;
+  justify-content: space-between;
+
+  .to-view-list--label {
+    font-size: 8px;
+    display: block;
+    text-align: center;
+    color: $summary-footer-label-colour;
+    margin-bottom: 2.5px;
+  }
+
+  .summary-footer--total-shows,
+  .summary-footer--total-viewing-duration,
+  .summary-footer--total-viewed-duration {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 2.5px;
+  }
+}
