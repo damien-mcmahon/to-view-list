@@ -13,6 +13,23 @@
     <link rel="apple-touch-icon" sizes="152x152" href="/assets/app-icons/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/app-icons/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="167x167" href="/assets/app-icons/touch-icon-ipad-retina.png">
+    <!-- no-script styling -->
+    <style>
+      .no-script--wrapper {
+        max-width: 960px;
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .no-script--message {
+        font-size: 100px;
+      }
+    </style>
 	</head>
-	<body></body>
+  <body>
+    <noscript class="no-script--wrapper">
+      <h1 class="no-script--title">Yep, this Single Page App does use Javascript to render.</h1>
+      <p class="no-script--message">😱 </p>
+    </noscript>
+  </body>
 </html>
