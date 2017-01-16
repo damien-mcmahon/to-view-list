@@ -1,0 +1,24 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "To-View-List",
+  "description": "Track your favourite shows and when they're on",
+  "short_name": "To-View",
+  "icons": [{
+    "src": "icon/lowres.webp",
+    "sizes": "64x64",
+    "type": "image/webp"
+  },{
+    "src": "icon/lowres.png",
+    "sizes": "64x64"
+  }, {
+    "src": "icon/hd_hi",
+    "sizes": "128x128"
+  }],
+  "scope": "/",
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#2E3235",
+  "background_color": "#2E3235",
+}
