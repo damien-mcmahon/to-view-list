@@ -3,6 +3,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import ManifestPlugin from 'webpack-manifest-plugin'
 
 const ENV = process.env.NODE_ENV || 'development';
 
@@ -97,7 +98,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './index.html',
 			minify: { collapseWhitespace: true }
-		})
+		}),
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      basePath: '/src/'
+    })
 	]).concat(ENV==='production' ? [
 		new webpack.optimize.OccurenceOrderPlugin()
 	] : []),
