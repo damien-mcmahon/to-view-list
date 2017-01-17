@@ -26,7 +26,7 @@ export default class Season extends Component {
     const { season, watched } = this.props;
     const seasonEpisodesCount = season.episode_count;
     const seasonNumber = season.season_number;
-    const episodesWatchedInSeason = watched && watched.episodesViewed && watched.episodesViewed[seasonNumber] ? watched.episodesViewed[seasonNumber] : [];
+    const episodesWatchedInSeason = this.countOfEpisodesWatchedInSeason(watched, season);
 
     this.setState({
       episodesWatchedCount: episodesWatchedInSeason.length
@@ -41,7 +41,7 @@ export default class Season extends Component {
   toggleEpisodesList() {
     if (!this.state.showEpisodes && !this.state.episodesForSeason.length) {
       const { season, show } = this.props;
-      //get the episodes from the server
+      //TODO - push this into an dispatch get the episodes from the server
       TvShowAPIService.getEpisodesForShow(show.id, season.season_number).then((episodesInfo) => {
         this.setState({
           episodesForSeason: episodesInfo.episodes
@@ -54,7 +54,7 @@ export default class Season extends Component {
     });
   }
 
-  toggleEpisodeViewed(episodeId, hasWatched){
+  toggleEpisodeViewed(episodeId, hasWatched) {
     const seasonNumber = this.props.season.season_number;
     const currentEpisodeWatchedCount = this.state.episodesWatchedCount;
     const newEpisodeCount = hasWatched ? currentEpisodeWatchedCount + 1 : currentEpisodeWatchedCount - 1; 
@@ -91,6 +91,16 @@ export default class Season extends Component {
     return new moment.duration(seasonDuration).format('H ');
   }
 
+  seasonComplete(watched, season) {
+    return watched && 
+      watched.episodesViewed[season.season_number] &&
+      watched.episodesViewed[season.season_number].completed ? watched.episodesViewed[season.season_number].completed : false;
+  }
+
+  countOfEpisodesWatchedInSeason(watched, season) {
+    return watched && watched.episodesViewed[season.season_number] ? watched.episodesViewed[season.season_number].watched : [];
+  }
+
   render(props, state) {
     const {
       season,
@@ -98,27 +108,26 @@ export default class Season extends Component {
       show
     } = this.props; 
 
-    //TODO: This is horrible. Make it less so.
-    const watchedForSeason = watched && watched.episodesViewed[season.season_number] ? watched.episodesViewed[season.season_number].watched : [];
-    const seasonComplete =
-      watched && watched.episodesViewed[season.season_number] && watched.episodesViewed[season.season_number].completed ? watched.episodesViewed[season.season_number].completed : false;
-    const seasonDuration = this.calculateSeasonDuration(show, season);
     return (
       <div class="season--wrapper">
         <div class="season--overview-wrapper">
           {this.getButtonIcon(state)}
-          <input class="season--season-complete" type="checkbox" onClick={this.toggleSeasonViewed} checked={seasonComplete} />
+          <input class="season--season-complete" type="checkbox" onClick={this.toggleSeasonViewed} checked={this.seasonComplete(watched, season)} />
           <h1 class="season--count">Season {season.season_number}</h1>
           <h2 class="season--episode-count">{season.episode_count} Episodes</h2>
           <h3 class="season--season-duration">
             <TVIcon iconName="clock" />
-            {seasonDuration}
+            {this.calculateSeasonDuration(show, season)}
             <span class="season--season-duration--units-label">Hours</span>
           </h3>
         </div>
         <div class="season--episodes-wrapper">
           {state.showEpisodes &&
-            <EpisodesList episodes={this.state.episodesForSeason} onToggleEpisode={this.toggleEpisodeViewed} watched={watchedForSeason} seasonComplete={seasonComplete} />
+            <EpisodesList 
+              episodes={this.state.episodesForSeason} 
+              onToggleEpisode={this.toggleEpisodeViewed} 
+              watched={this.countOfEpisodesWatchedInSeason(watched, season)} 
+              seasonComplete={this.seasonComplete(watched, season)} />
           }
         </div>
       </div>
