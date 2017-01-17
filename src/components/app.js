@@ -5,6 +5,7 @@ import { Provider, connect } from 'preact-redux';
 import Header from './header';
 import Home from '../containers/home';
 import About from '../containers/about';
+import Calendar from '../containers/calendar';
 
 import style from '../style';
 
@@ -24,6 +25,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
           <About path="/about" />
+          <Calendar path="/calendar" />
 				</Router>
 			</div>
 		);

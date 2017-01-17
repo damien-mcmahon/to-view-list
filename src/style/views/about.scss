@@ -1,0 +1,19 @@
+.to-view-list--about-wrapper {
+  padding: 10px;
+  margin: 25% auto;
+
+  text-align: center;
+
+  .about--title {
+    font-size: 20px;
+  }
+
+  .about--technology,
+  .about--creator {
+    font-size: 18px;
+  }
+
+  .about--text {
+    font-size: 12px;
+  }
+}
