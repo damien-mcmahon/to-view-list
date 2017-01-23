@@ -27,6 +27,13 @@
         font-size: 100px;
       }
     </style>
+    <script>
+      (function() {
+        if('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/toviewAppServiceWorker.js');
+        }
+      })();
+    </script>
 	</head>
   <body>
     <noscript class="no-script--wrapper">

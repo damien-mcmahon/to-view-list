@@ -3,6 +3,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
 
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
@@ -96,7 +97,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './index.html',
 			minify: { collapseWhitespace: true }
-		})
+		}),
+		new SWPrecacheWebpackPlugin({
+      cacheId: 'toViewApp',
+      filename: 'toviewAppServiceWorker.js'
+    })
 	]).concat(ENV==='production' ? [
 		new webpack.optimize.OccurenceOrderPlugin()
 	] : []),
