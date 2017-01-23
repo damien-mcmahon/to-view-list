@@ -30,7 +30,13 @@
     <script>
       (function() {
         if('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/toviewAppServiceWorker.js');
+          try {
+            navigator.serviceWorker.register('/toviewAppServiceWorker.js');
+          } catch(e) 
+          {
+            //TODO - Handle this better
+            console.log("E:",e);
+          }
         }
       })();
     </script>

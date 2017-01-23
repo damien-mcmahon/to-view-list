@@ -21,12 +21,14 @@ export default class App extends Component {
 	render() {
 		return (
 			<div id="app">
+        <div class="app--container">
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
           <About path="/about" />
           <Calendar path="/calendar" />
 				</Router>
+        </div>
 			</div>
 		);
 	}

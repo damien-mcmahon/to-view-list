@@ -1,6 +1,7 @@
 $panel-bg: $theme-black;
 $panel-border: $theme-white;
 $tv-show-panel-label-colour: $theme-white;
+$panel-max-width: 960px;
 
 .to-view-list--info-panel-wrapper {
   display: flex;
@@ -15,6 +16,12 @@ $tv-show-panel-label-colour: $theme-white;
   border-radius: 2.5px;
   padding: 5px;
   border: 1px solid rgba($panel-border, .2);
+  max-width: $panel-max-width;
+
+  @include mq($panel-max-width) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .tv-show-poster--wrapper {
     width: 100px;

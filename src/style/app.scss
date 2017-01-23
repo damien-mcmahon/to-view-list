@@ -1,6 +1,7 @@
 @import 'theme/dark';
 @import 'helpers/normalize';
 @import 'mixins/networks';
+@import 'mixins/mq';
 @import 'elements/buttons';
 @import 'elements/icons';
 @import 'elements/inputs';
@@ -21,6 +22,8 @@
 
 $app-bg: $theme-bg-colour;
 $app-colour: $theme-colour;
+$app-max-width: 960px;
+$app-min-width: 320px;
 
 a {
   color: $app-colour;
@@ -41,5 +44,13 @@ body {
   max-height: 100vh;
   font-family: $app-font-family;
   color: $app-colour;
+  min-width: $app-min-width;
+
+  .app--container {
+    @include mq($app-max-width) {
+      width: $app-max-width;
+      margin: 0 auto;
+    }
+  }
 }
 

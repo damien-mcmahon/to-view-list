@@ -8,6 +8,29 @@ import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
 
+const NO_ERRORS_PLUGIN = new webpack.NoErrorsPlugin();
+const EXTRACT_TEXT = new ExtractTextPlugin('style.css', {
+			allChunks: true,
+			disable: ENV!=='production'
+		});
+const DE_DUPE = new webpack.optimize.DedupePlugin();
+const DEFINE_PLUGIN = new webpack.DefinePlugin({
+			'process.env': JSON.stringify({ NODE_ENV: ENV })
+		});
+const HTML_PLUGIN = new HtmlWebpackPlugin({
+			template: './index.html',
+			minify: { collapseWhitespace: true }
+		});
+const SW_PRECACHE_PLUGIN = new SWPrecacheWebpackPlugin({
+      cacheId: 'toViewApp',
+      filename: 'toviewAppServiceWorker.js'
+    })
+
+const PLUGINS = [NO_ERRORS_PLUGIN, EXTRACT_TEXT, DE_DUPE, DEFINE_PLUGIN, HTML_PLUGIN];
+
+if (ENV === 'prodution') {
+  PLUGINS.concat(SW_PRECACHE_PLUGIN);
+}
 module.exports = {
 	context: path.resolve(__dirname, "src"),
 	entry: ['whatwg-fetch','./index.js'],
@@ -84,25 +107,7 @@ module.exports = {
 		autoprefixer({ browsers: 'last 2 versions' })
 	],
 
-	plugins: ([
-		new webpack.NoErrorsPlugin(),
-		new ExtractTextPlugin('style.css', {
-			allChunks: true,
-			disable: ENV!=='production'
-		}),
-		new webpack.optimize.DedupePlugin(),
-		new webpack.DefinePlugin({
-			'process.env': JSON.stringify({ NODE_ENV: ENV })
-		}),
-		new HtmlWebpackPlugin({
-			template: './index.html',
-			minify: { collapseWhitespace: true }
-		}),
-		new SWPrecacheWebpackPlugin({
-      cacheId: 'toViewApp',
-      filename: 'toviewAppServiceWorker.js'
-    })
-	]).concat(ENV==='production' ? [
+	plugins: (PLUGINS).concat(ENV==='production' ? [
 		new webpack.optimize.OccurenceOrderPlugin()
 	] : []),
 
