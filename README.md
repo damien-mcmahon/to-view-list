@@ -1,25 +1,24 @@
 # To-View List #
 This is a twist on the usual to-do list that most Javscript frameworks use as a benchmark for how easy they are to use.
 This is just an exploration of using Preact with Redux and Webpack. Below are instructions on how to get this repo running.
-Data for this is provided by the excellent [Movie Database(https://themoviedb.org)
+Data for this is provided by the excellent [Movie Database](https://themoviedb.org).
+This app is designed Mobile first but looks acceptable on Desktop.
 
 ## To-Do List ##
-- [] Add Tests
-- [] Add appcache
+- [-] Add Tests
+- [-] Add appcache
 - [x] Service Worker
-- [] 100% PWA compatibility
-- [] Optimise using `shouldComponentUpdate` etc
-- [] Clean up code to clearly separate logic from rendering
-- [] Properly use `linkState` etc that preact brings
-- [] Add extra features
+- [-] 100% PWA compatibility
+- [-] Optimise using `shouldComponentUpdate` etc
+- [-] Clean up code to clearly separate logic from rendering
+- [-] Properly use `linkState` etc that preact brings
+- [-] Add extra features
 
 
 ## Build ##
 This was built using Preact Boilerplate: 
 [![Build Status](https://travis-ci.org/developit/preact-boilerplate.svg?branch=master)](https://travis-ci.org/developit/preact-boilerplate)
 [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/developit/preact)
-
-> **[:boom: View Demo :boom:](https://preact-boilerplate.surge.sh)**
 
 Clone this repo and run `npm install`, you could use `yarn` if that's your cup of tea.
 
