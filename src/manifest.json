@@ -5,20 +5,30 @@
   "description": "Track your favourite shows and when they're on",
   "short_name": "To-View",
   "icons": [{
-    "src": "icon/lowres.webp",
+    "src": "assets/app-icons/touch-icon.png",
     "sizes": "64x64",
-    "type": "image/webp"
+    "type": "image/png"
   },{
-    "src": "icon/lowres.png",
-    "sizes": "64x64"
-  }, {
-    "src": "icon/hd_hi",
-    "sizes": "128x128"
+    "src": "assets/app-icons/touch-icon-ipad.png",
+    "sizes": "64x64",
+    "type": "image/png"
+  },{
+    "src": "assets/app-icons/touch-icon-ipad-retina.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },{
+    "src": "assets/app-icons/touch-icon-iphone-retina.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  },{
+    "src": "assets/app-icons/touch-icon-iphone-retina.png",
+    "sizes": "192x192",
+    "type": "image/png"
   }],
   "scope": "/",
   "start_url": "/index.html",
   "display": "fullscreen",
   "orientation": "portrait",
   "theme_color": "#2E3235",
-  "background_color": "#2E3235",
+  "background_color": "#2E3235"
 }
