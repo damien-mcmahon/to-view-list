@@ -7,16 +7,16 @@ const ONE_DAY = '24';
 
 export default class SummaryFooter extends Component {
   
-  calculateAllViewingTime(shows, watched) {
-    return shows.reduce((viewingTime, show) => {
+  calculateAllViewingTime = (shows, watched) => (
+    shows.reduce((viewingTime, show) => {
       const showAverageDuration = show.episode_run_time.reduce((totalTime, runTime) => totalTime +runTime) / show.episode_run_time.length;
 
       return viewingTime + show.number_of_episodes * showAverageDuration;
-    }, 0);
-  } 
+    }, 0)
+  ) 
 
-  calculateViewedTime(shows, watched) {
-    return shows.reduce((viewedTime, show) => {
+  calculateViewedTime = (shows, watched) => (
+    shows.reduce((viewedTime, show) => {
       const showAverageDuration = show.episode_run_time.reduce((totalTime, runTime) => totalTime +runTime) / show.episode_run_time.length;
       const showHasBeenWatched = watched[show.id] || undefined;
       let episodesWatchedCount = 0;
@@ -33,9 +33,8 @@ export default class SummaryFooter extends Component {
         }
       }
       return viewedTime += episodesWatchedCount * showAverageDuration;
-    }, 0);
-  }
-  
+    }, 0)
+  ) 
   displayFormattedDuration(duration) {
     const totalViewingDuration = new moment.duration(duration, MINUTES);
 

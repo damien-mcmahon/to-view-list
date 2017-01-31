@@ -5,6 +5,7 @@ import moment from 'moment';
 import TvShowPoster from '../../components/tv-show-poster';
 import Season from '../../components/season';
 import TVIcon from '../../components/icon';
+import TvNetworkBadge from '../../components/tv-network-badge';
 
 import { hideTvPanel } from '../../actions/tv-panel';
 import { 
@@ -19,9 +20,12 @@ const LAST_AIR_DATE_FORMAT = 'MMM Do YYYY';
 const NETWORKS_WITHOUT_RELEASE_DATES = ['netflix'];
 
 
-const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state.tvShowsWatched});
+const panelStateToProps = (state) => ({
+  panel: state.tvShowPanel, 
+  watched: state.tvShowsWatched
+});
 
- class TvShowPanel extends Component {
+class TvShowPanel extends Component {
 
   constructor(props) {
     super(props);
@@ -79,16 +83,6 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     return `${airDate.format(AIRED_DATE_FORMAT)}s`;
   }
 
-  //TODO: This is probably a component
-  tvShowNetworkBadge(show) {
-    const primaryNetwork = show.networks[0];
-    return (
-      <p class={`tv-show-panel--network-badge network-badge --network-${primaryNetwork.name.toLowerCase().replace(' ', '-')}`}>
-        {primaryNetwork.name}
-      </p>
-    );
-  }
-
   //TODO: Handle displaying this better - maybe a service
   canShowAirDateLabel(show) {
     const primaryNetwork = show.networks[0];
@@ -111,7 +105,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
     }
   }
 
-  render() {
+  render(props) {
     const { tvShow:show, visible} = this.props.panel;
 
     if (!visible) {
@@ -146,7 +140,7 @@ const panelStateToProps = (state) => ({ panel: state.tvShowPanel, watched: state
               </h1>
             </div>
             <div class="tv-show-panel--show-info">
-              {this.tvShowNetworkBadge(show)}
+              <TvNetworkBadge network={props.panel.tvShow.networks[0].name} />
               {displayShowAirDay &&
                 <span class="tv-show-panel--show-day-of-week">
                   <span class="tv-show-panel--info-label">Aired on: </span>

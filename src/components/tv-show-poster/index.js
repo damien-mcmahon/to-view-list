@@ -1,4 +1,6 @@
 import { h, Component } from 'preact';
+import { compose, pure, mapProps } from 'recompose';
+
 //TODO: Set the configuration via a call at load time
 const BASE_URL = 'http://image.tmdb.org/t/p/';
 const SIZES = {
@@ -7,28 +9,17 @@ const SIZES = {
   'large' : 'w342' 
 };
 
-export default class TvShowPoster extends Component {
-  constructor(props) {
-    super(props);
-    this.sendClick = this.sendClick.bind(this);
-  }
+const enhanced = compose(
+  mapProps(props => ({
+    posterPath: `${BASE_URL}${SIZES[props.size]}${props.path}` 
+  })),
+  pure
+);
 
-  sendClick() {
-    if (this.props.onClick) {
-      this.props.onClick();
-    }
-  }
+const TvShowPoster = props => (
+  <div class="tv-show-poster--wrapper" onClick={props.onClick}>
+    <img src={props.posterPath} alt={`Poster for ${props.tvShow}`} class={`tv-show-poster tv-show-poster--${props.size}`} />
+  </div>
+);
 
-  render() {
-    const tvShowName = this.props.tvShow;
-    const posterSize = this.props.size;
-    const posterPath = `${BASE_URL}${SIZES[this.props.size]}${this.props.path}`;
-
-    return (
-      <div class="tv-show-poster--wrapper" onClick={this.sendClick}>
-        <img src={posterPath} alt={`Poster for ${tvShowName}`} class={`tv-show-poster tv-show-poster--${posterSize}`} />
-      </div>
-    );
-  }
-};
-
+export default enhanced(TvShowPoster);

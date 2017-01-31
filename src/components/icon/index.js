@@ -1,12 +1,10 @@
 import { h, Component } from 'preact';
 import Icon from 'react-inlinesvg';
+import { pure } from 'recompose';
 
 const BASE_PATH = '/assets/svgs/';
+const TVIcon = props => (
+  <Icon src={`${BASE_PATH}${props.iconName}.svg`} cacheGetRequests={true} />
+);
 
-export default class TVIcon extends Component {
-  render() {
-    const { iconName } = this.props;
-    return (<Icon src={`${BASE_PATH}${iconName}.svg`} cacheGetRequests={true} />);
-  }
-}; 
-
+export default pure(TVIcon);
