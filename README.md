@@ -8,7 +8,7 @@ This app is designed Mobile first but looks acceptable on Desktop.
 - [-] Add Tests
 - [-] Add appcache
 - [x] Service Worker
-- [-] 100% PWA compatibility
+- [x] 100% PWA compatibility
 - [-] Optimise using `shouldComponentUpdate` etc
 - [-] Clean up code to clearly separate logic from rendering
 - [-] Properly use `linkState` etc that preact brings

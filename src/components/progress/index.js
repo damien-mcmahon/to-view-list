@@ -1,16 +1,21 @@
 import { h, Component } from 'preact';
+import { compose, defaultProps, pure, mapProps } from 'recompose';
+const DISPLAY_PERCENTAGE = 0;
 
-export default class ProgressBar extends Component {
-  render(props) {
-    const { total, progress } = props;
-    const progressWidth = Math.round(Number(progress/total * 100).toFixed(0));
+const enhanced = compose(
+  mapProps(props => ({
+    progressWidth: Math.round(Number(props.progress/props.total * 100)).toFixed(DISPLAY_PERCENTAGE)
+  })),
+  defaultProps({total: 100, progress: 0}),
+  pure
+);
 
-    return (
-      <div class="progress-bar--wrapper">
-        <span class="progress-bar--label">{progressWidth}%</span>
-        <div class="progress-bar" style={{width: `${progressWidth}%`}}>
-        </div>
-      </div>
-    );
-  }
-}
+const ProgressBar = props => (
+  <div class="progress-bar--wrapper">
+    <span class="progress-bar--label">{props.progressWidth}%</span>
+    <div class="progress-bar" style={{width: `${props.progressWidth}%`}}>
+    </div>
+  </div>
+);
+
+export default enhanced(ProgressBar);

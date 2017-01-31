@@ -33,7 +33,8 @@ class Home extends Component {
     this.panelCloseHandler = this.panelCloseHandler.bind(this);
 
     this.state = {
-      clearSearch: false
+      clearSearch: false,
+      searchResults: []
     };
   }
 
@@ -56,7 +57,7 @@ class Home extends Component {
       dispatch(addTvShowToList(tvShow));
 
       this.setState({
-        searchResults: null,
+        searchResults: [],
         clearSearch: true
       });
     });
@@ -84,7 +85,7 @@ class Home extends Component {
 			<div class="to-view-list--home--wrapper">
         <div class="home-view--search-wrapper">
           <TvSearch searchFor={this.doSearch} clearSearch={state.clearSearch}/>
-          <SearchResultList resultsSet={this.state.searchResults} onSelect={this.selectShow} />
+          <SearchResultList resultsSet={state.searchResults} onSelect={this.selectShow} />
         </div>
         <TvShowList
          shows={shows} 

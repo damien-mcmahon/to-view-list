@@ -1,25 +1,19 @@
 import { h, Component } from 'preact';
 import SearchResultItem from '../search-result-item';
+import { compose, defaultProps, pure } from 'recompose';
 
-export default class SearchResultList extends Component {
-  constructor(props) {
-    super(props);
-    this.sendItem = this.sendItem.bind(this);
-  }
+const enhanced = compose(
+  defaultProps({ resultsSet: []}),
+  pure
+);
 
-  sendItem(item) {
-    this.props.onSelect(item);
-  }
+const SearchResultList = props => (
+  <ul class="search-result-list--wrapper">
+    {props.resultSet && props.resultSet.map((result) => {
+      return <SearchResultItem result={result} onClick={props.onSelect} />
+      })
+    } 
+  </ul>
+);
 
-  render() {
-    const resultSet = this.props.resultsSet || []
-    return (
-      <ul class="search-result-list--wrapper">
-        {resultSet.map((result) => {
-          return <SearchResultItem result={result} onClick={this.sendItem} />
-          })
-        } 
-      </ul>
-    );
-  }
-};
+export default enhanced(SearchResultList);

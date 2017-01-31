@@ -29,6 +29,14 @@
     </style>
     <script>
       (function() {
+        var isDevRegEx = /local/
+        var HOST = window.location.host;
+        
+        if (isDevRegEx.test(HOST))
+        {
+         return;
+        }
+
         if('serviceWorker' in navigator) {
           try {
             navigator.serviceWorker.register('/toviewAppServiceWorker.js');
