@@ -9,7 +9,7 @@ const enhanced = compose(
 
 const SearchResultList = props => (
   <ul class="search-result-list--wrapper">
-    {props.resultSet && props.resultSet.map((result) => {
+    {props.resultsSet && props.resultsSet.map((result) => {
       return <SearchResultItem result={result} onClick={props.onSelect} />
       })
     } 

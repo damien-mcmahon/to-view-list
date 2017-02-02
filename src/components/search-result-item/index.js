@@ -13,7 +13,7 @@ const SearchResultItem = props => (
       onClick={props.onClick.bind(null, props.result)} 
     />
     <h1 class="search-result-item--name">{props.result.name}</h1>
-    <button class="button --action-add search-result-item--add-to-list" onClick={this.sendItem}>
+    <button class="button --action-add search-result-item--add-to-list" onClick={props.onClick}>
       <TVIcon iconName="plus" />
     </button>
   </li>
