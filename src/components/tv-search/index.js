@@ -47,7 +47,11 @@ export default class TvSearch extends Component {
     return (
       <div class="tv-search--wrapper">
         <label for="tv-search--input" class="tv-search--input-label">Search</label>
-        <input type="search" class="tv-search--input" name="tv-search--input"  placeholder="Breaking Bad" onInput={this.search} value={searchTerm} />
+        <input type="search" 
+          class="tv-search--input" 
+          name="tv-search--input"  
+          placeholder="Breaking Bad" 
+          onInput={this.search} value={searchTerm} />
       </div>
     );
   }

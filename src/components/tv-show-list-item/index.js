@@ -27,13 +27,13 @@ export default class TvShowListItem extends Component {
     this.props.onInfoClick(this.props.show);
   }
 
-
   countEpisodesWatched(show, watchedEpisodes = {}) {
     const { episodesViewed } = watchedEpisodes; 
 
     if (!episodesViewed || !watchedEpisodes) {
       return ZERO;
     }
+
     const seasons = Object.keys(episodesViewed);
 
     return seasons.reduce((totalCount, seasonNumber) => {
@@ -45,23 +45,17 @@ export default class TvShowListItem extends Component {
     }, ZERO);
   }
 
-  render(props) {
-    const { show, watchedInfo } = props;
-    const cssStatusClass = STATUS_TO_CSS_MAP[show.status.toLowerCase()];
-    const episodesWatchedCount = this.countEpisodesWatched(show, watchedInfo);
-   
-    return (
-      <div class={`tv-show-list-item--wrapper ${cssStatusClass}`}>
+  render = props => (
+      <div class={`tv-show-list-item--wrapper ${STATUS_TO_CSS_MAP[props.show.status.toLowerCase()]}`}>
         <TvShowPoster 
-          path={show.poster_path}
-          tvShow={show.name}
+          path={props.show.poster_path}
+          tvShow={props.show.name}
           size={POSTER_SIZE}
-          onClick={this.showInfoPanel}
-         />
+          onClick={this.showInfoPanel} />
         <div class="tv-show-list-item--info-section-wrapper">
           <div class="tv-show-list-item--title-wrapper">
             <h1 class="tv-show-list-item--title">
-              {show.name}
+              {props.show.name}
             </h1>
             <div class="tv-show-list-item--actions-wrapper">
               <button class="button tv-show-list-item--info" onClick={this.showInfoPanel}>
@@ -73,15 +67,14 @@ export default class TvShowListItem extends Component {
             </div>
           </div>
           <div class="tv-show-list-item--info-wrapper">
-            <span class="tv-show-list-item--seasons">{show.number_of_seasons} seasons</span>
-            <span class="tv-show-list-item--episodes">{show.number_of_episodes} epidodes</span>
+            <span class="tv-show-list-item--seasons">{props.show.number_of_seasons} seasons</span>
+            <span class="tv-show-list-item--episodes">{props.show.number_of_episodes} epidodes</span>
           </div>
           <div class="tv-show-list-item--progress-wrapper">
-            <ProgressBar total={show.number_of_episodes} progress={episodesWatchedCount} /> 
+            <ProgressBar total={props.show.number_of_episodes} progress={this.countEpisodesWatched(props.show, props.watchedInfo)} /> 
           </div>
         </div>
       </div>
     );
-  }
 }
 

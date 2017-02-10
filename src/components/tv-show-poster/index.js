@@ -18,7 +18,10 @@ const enhanced = compose(
 
 const TvShowPoster = props => (
   <div class="tv-show-poster--wrapper" onClick={props.onClick}>
-    <img src={props.posterPath} alt={`Poster for ${props.tvShow}`} class={`tv-show-poster tv-show-poster--${props.size}`} />
+    <img 
+      src={props.posterPath} 
+      alt={`Poster for ${props.tvShow}`} 
+      class={`tv-show-poster tv-show-poster--${props.size}`} />
   </div>
 );
 
