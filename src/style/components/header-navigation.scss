@@ -1,0 +1,55 @@
+$nav-button-colour: #FFF;
+$nav-button-bg: #000;
+$nav-menu-bg: #343434;
+$button-size: 32px;
+
+.nav--wrapper {
+  will-change: transition;
+
+  .nav--menu-button {
+    border-radius: 3px;
+    color: $nav-button-colour;
+    position: absolute;
+    top: 10px;
+    left: calc(100% - (10px + #{$button-size}));
+    height: $button-size;
+    width: $button-size;
+    transition: left .2s .2s ease-out;
+    background: $nav-button-bg;
+
+    @include mq($app-max-width) {
+      display: none;
+    }
+  }
+
+  input {
+    position: absolute;
+    left: calc(100% - (10px + #{$button-size}));
+    clip: rect(0, 0, 0, 0);
+
+    &:checked + .button {
+      left: calc(50% - (10px + #{$button-size}));
+    }
+
+    &:checked ~ .nav--menu-wrapper {
+      left: 50%;
+      box-shadow: -10px 0 10px rgba($nav-menu-bg, .4);
+    }
+  }
+
+  .nav--menu-wrapper {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 100vh;
+    background: $nav-menu-bg;
+    width: 50%;
+    transition: left .2s .2s ease-out;
+    z-index: 10;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+  }
+}
