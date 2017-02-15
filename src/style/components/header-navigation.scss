@@ -14,7 +14,7 @@ $button-size: 32px;
     left: calc(100% - (10px + #{$button-size}));
     height: $button-size;
     width: $button-size;
-    transition: left .2s .2s ease-out;
+    transition: left .2s ease-out;
     background: $nav-button-bg;
 
     @include mq($app-max-width) {
@@ -44,12 +44,18 @@ $button-size: 32px;
     height: 100vh;
     background: $nav-menu-bg;
     width: 50%;
-    transition: left .2s .2s ease-out;
+    transition: left .2s ease-out;
     z-index: 10;
+    padding-top: 5vh;
   }
 
   a {
     display: block;
     width: 100%;
+    padding: 10px;
+
+    &:hover {
+      background: lighten($nav-menu-bg, 5%);
+    }
   }
 }
