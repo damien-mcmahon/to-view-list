@@ -1,5 +1,5 @@
 $nav-button-colour: #FFF;
-$nav-button-bg: #000;
+$nav-button-bg: transparent;
 $nav-menu-bg: #343434;
 $button-size: 32px;
 
@@ -22,13 +22,57 @@ $button-size: 32px;
     }
   }
 
+  .nav--menu-button-label {
+    position: relative;
+    color: transparent;
+    line-height: $button-size;
+
+    &:before {
+      content: '';
+      position: absolute;
+      background: #FFF;
+      height: 1px;
+      width: 70%;
+      left: 2px;
+      top: 2px;
+      transition: transform .2s ease-out;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      background: #FFF;
+      height: 1px;
+      width: 70%;
+      background: #FFF;
+      left: 2px;
+      bottom: 10px;
+      transition: transform .2s ease-out;
+    }
+  }
+
   input {
     position: absolute;
     left: calc(100% - (10px + #{$button-size}));
     clip: rect(0, 0, 0, 0);
 
     &:checked + .button {
-      left: calc(50% - (10px + #{$button-size}));
+      left: calc(50% + 10px);
+      z-index: 11;
+
+      .nav--menu-button-label {
+        &:before {
+          transform: rotate(45deg);
+          top: 7px;
+          left: 1px;
+        }
+        
+        &:after {
+          transform: rotate(-45deg);
+          bottom: 15px;
+          left: 1px;
+        }
+      }
     }
 
     &:checked ~ .nav--menu-wrapper {
@@ -46,7 +90,7 @@ $button-size: 32px;
     width: 50%;
     transition: left .2s ease-out;
     z-index: 10;
-    padding-top: 5vh;
+    padding-top: 8vh;
   }
 
   a {
