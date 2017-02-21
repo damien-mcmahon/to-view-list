@@ -10,8 +10,8 @@ $button-size: 32px;
     border-radius: 3px;
     color: $nav-button-colour;
     position: absolute;
-    top: 10px;
-    left: calc(100% - (10px + #{$button-size}));
+    top: 5px;
+    left: calc(100% - (5px + #{$button-size}));
     height: $button-size;
     width: $button-size;
     transition: left .2s ease-out;
@@ -52,11 +52,11 @@ $button-size: 32px;
 
   input {
     position: absolute;
-    left: calc(100% - (10px + #{$button-size}));
+    left: calc(100% - (5px + #{$button-size}));
     clip: rect(0, 0, 0, 0);
 
     &:checked + .button {
-      left: calc(50% + 10px);
+      left: calc(50% + 5px);
       z-index: 11;
 
       .nav--menu-button-label {
@@ -74,7 +74,7 @@ $button-size: 32px;
       }
 
       @include mq($app-max-width) {
-        left: calc(100% - (10px + #{$button-size}));
+        left: calc(100% - (5px + #{$button-size}));
       }
     }
 
@@ -86,6 +86,7 @@ $button-size: 32px;
       @include mq($app-max-width) {
         left: 0;
         display: block;
+        top: 40px;
       }
     }
   }
