@@ -18,7 +18,6 @@ $button-size: 32px;
     background: $nav-button-bg;
 
     @include mq($app-max-width) {
-      display: none;
     }
   }
 
@@ -73,11 +72,21 @@ $button-size: 32px;
           left: 1px;
         }
       }
+
+      @include mq($app-max-width) {
+        left: calc(100% - (10px + #{$button-size}));
+      }
     }
 
     &:checked ~ .nav--menu-wrapper {
       left: 50%;
       box-shadow: -10px 0 10px rgba($nav-menu-bg, .4);
+      display: block;
+
+      @include mq($app-max-width) {
+        left: 0;
+        display: block;
+      }
     }
   }
 
@@ -91,15 +100,33 @@ $button-size: 32px;
     transition: left .2s ease-out;
     z-index: 10;
     padding-top: 8vh;
-  }
+    display: none;
 
-  a {
-    display: block;
-    width: 100%;
-    padding: 10px;
+    a {
+      display: block;
+      width: 100%;
+      padding: 10px;
 
-    &:hover {
-      background: lighten($nav-menu-bg, 5%);
+      &:hover {
+        background: lighten($nav-menu-bg, 5%);
+      }
+    }
+
+    @include mq($app-max-width) {
+      left: 0;
+      top: 50px;
+      width: 100%;
+      padding-top: 0;
+      height: auto;
+      padding: 5px;
+      text-align: left;
+
+      a {
+        display: inline-block;
+        width: 20%;
+        text-align: center;
+      }
     }
   }
+
 }
