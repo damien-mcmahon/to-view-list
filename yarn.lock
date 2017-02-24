@@ -83,6 +83,10 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
+appcache-webpack-plugin@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/appcache-webpack-plugin/-/appcache-webpack-plugin-1.3.0.tgz#f62b7d42dec735ed3a61428e214800de4a2e8a7e"
+
 aproba@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.0.4.tgz#2713680775e7614c8ba186c065d4e2e52d1072c0"
@@ -4313,9 +4317,9 @@ preact-transition-group@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/preact-transition-group/-/preact-transition-group-1.1.0.tgz#97d0beff0790d721faecd2560c02cd30d5426f23"
 
-preact@^6.0.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-6.4.0.tgz#1b8c99754b002639a1c33e68175eefa98a01cc14"
+preact@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-7.2.0.tgz#8aacc97465a65509bc556604a7750d48e2fa7ad1"
 
 prelude-ls@~1.1.2:
   version "1.1.2"

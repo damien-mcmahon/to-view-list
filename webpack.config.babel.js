@@ -4,6 +4,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
+import OfflinePlugin from 'offline-plugin';
+
 
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
@@ -26,7 +28,16 @@ const SW_PRECACHE_PLUGIN = new SWPrecacheWebpackPlugin({
       filename: 'toviewAppServiceWorker.js'
     })
 
-const PLUGINS = [NO_ERRORS_PLUGIN, EXTRACT_TEXT, DE_DUPE, DEFINE_PLUGIN, HTML_PLUGIN];
+const APP_CACHE_PLUGIN = new OfflinePlugin({
+  AppCache: {
+   directory: 'appcache/',
+   FALLBACK: { '/': '/' }
+  },
+  //already got the SW Cache plugin for now...
+  ServiceWorkder: false
+});
+
+const PLUGINS = [NO_ERRORS_PLUGIN, EXTRACT_TEXT, DE_DUPE, DEFINE_PLUGIN, HTML_PLUGIN, APP_CACHE_PLUGIN];
 
 if (ENV === 'prodution') {
   PLUGINS.concat(SW_PRECACHE_PLUGIN);
